@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>MyStandort</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0b2/jquery.mobile-1.0b2.min.css" />
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/mobile/1.0b2/jquery.mobile-1.0b2.min.js"></script>
+    <script type="text/javascript">
+        jQuery(window).ready(function(){
+            jQuery("#btneinchecken").click(geolocation_starten);
+        });
+
+        function geolocation_starten() {
+            navigator.geolocation.getCurrentPosition(geolocation_action, errors_action);
+        }
+
+        function errors_action(error) {
+            switch(error.code){
+                case error.PERMISSION_DENIED: alert("Der Nutzer m&ouml;chte keine Daten teilen.");break;
+                case error.POSITION_UNAVAILABLE: alert("Die Geodaten sind nicht erreichbar.");break;
+                case error.PERMISSION_DENIED: alert("Timeout erhalten");break;
+                default: alert ("Unbekannter Error");break;
+            }
+        }
+
+        function geolocation_action(position){
+            var browserbreite = 200;
+            var karte_url = "http://maps.google.com/maps/api/staticmap?sensor=true&center="+ position.coords.latitude +","+ position.coords.longitude +"zoom=15&size="+ browserbreite +"x250&markers=color:red|label:A|"+ position.coords.latitude +","+ position.coords.longitude;
+
+            jQuery("#karteAktuell").remove();
+            jQuery("#karte").append(
+                jQuery(document.createElement("img")).attr("src", karte_url).attr('id','karteAktuell')
+            );
+        }
+
+    </script>
+  </head>
+  <body>
+      <div data-role="page" id="startseite">
+          <div data-role="header" data-position="fixed">
+              <h1>MyStandort</h1>
+          </div>
+          <div data-role="content">
+              <p>Hier k&ouml;nnen sie ihren Standort einchecken. Viel Spa&szlig; dabei !</p>
+          </div>
+          <div data-role="footer" data-position="fixed">
+              <div data-role="navbar">
+                  <ul>
+                      <li><a href="#startseite" class="ui-btn-active">Startseite</a></li>
+                      <li><a href="#letzterStandort">Letzter Standort</a></li>
+                      <li><a href="#einchecken">Einchecken</a></li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+            <div data-role="page" id="letzterStandort">
+          <div data-role="header" data-position="fixed">
+              <h1>MyStandort</h1>
+          </div>
+          <div data-role="content">
+              <h3>Lassen sie sich ihren letzten Standort anzeigen:</h3>
+              <p><a href="#" data-role="button" id="letzterStandortanzeigen">Anzeigen</a></p>
+          </div>
+          <div data-role="footer" data-position="fixed">
+              <div data-role="navbar">
+                  <ul>
+                      <li><a href="#startseite">Startseite</a></li>
+                      <li><a href="#letzterStandort" class="ui-btn-active">Letzter Standort</a></li>
+                      <li><a href="#einchecken">Einchecken</a></li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+            <div data-role="page" id="einchecken">
+          <div data-role="header" data-position="fixed">
+              <h1>MyStandort</h1>
+          </div>
+          <div data-role="content">
+              <h3>Checken sie hier ihren derzeitigen Standort ein:</h3>
+              <p><a href="#" data-role="button" id="btneinchecken">Einchecken</a></p>
+              <div id="karte"></div>
+          </div>
+          <div data-role="footer" data-position="fixed">
+              <div data-role="navbar">
+                  <ul>
+                      <li><a href="#startseite">Startseite</a></li>
+                      <li><a href="#letzterStandort">Letzter Standort</a></li>
+                      <li><a href="#einchecken" class="ui-btn-active">Einchecken</a></li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+  </body>
+</html>
