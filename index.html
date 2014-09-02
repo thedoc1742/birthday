@@ -1,97 +1,130 @@
 <!DOCTYPE HTML>
 <html>
-  <head>
-    <title>MyStandort</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+<head>
+	<title>ExerciseTracker</title>
+	
+	<script type="text/javascript" src="cordova-1.7.0.js"></script>
+	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDD353fOPh-KBUQ-2ekPCg75uxXRn0D9Tk&sensor=false"></script>
+	<script type="text/javascript" src="json2.js"></script>
+	<script type="text/javascript" src="jquery-1.7.2.min.js"></script>
+	<script type="text/javascript" src="jquery.mobile-1.1.0.min.js"></script>
+    <script type="text/javascript" src="exercisetracker.js"></script>
+	<link rel="stylesheet" href="jquery.mobile-1.1.0.min.css" />
+	
+</head>
+<body>
+<!-- Start of Home page -->
+<div data-role="page" id="home">
 
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0b2/jquery.mobile-1.0b2.min.css" />
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
-    <script type="text/javascript" src="http://code.jquery.com/mobile/1.0b2/jquery.mobile-1.0b2.min.js"></script>
-    <script type="text/javascript">
-        jQuery(window).ready(function(){
-            jQuery("#btneinchecken").click(geolocation_starten);
-        });
+	<div data-role="header">
+	
+		<h1>Home</h1>
+	
+		<div data-role="navbar">
+			<ul>
+				<li><a href="#home" data-transition="none" data-icon="home">Home</a></li>
+				<li><a href="#startTracking" data-transition="none" data-icon="plus">Track Workout</a></li>
+				<li><a href="#history" data-transition="none" data-icon="star">History</a></li>
+			</ul>
+		</div>
+	</div>
 
-        function geolocation_starten() {
-            navigator.geolocation.getCurrentPosition(geolocation_action, errors_action);
-        }
+	<div data-role="content">
+		<p>Welcome to the <em>ExerciseTracker</em> app. By clicking <em>Track Workout</em> you can record your workouts using the GPS feature on your phone. Learn how to build this app by reading <em>mobile.tutsplus.com</em>.</p>
+	
+		<button id="home_network_button" data-icon="check">Internet Access Enabled</button>
+		<button id="home_clearstorage_button">Clear local storage</button>
+		<button id="home_seedgps_button">Load Seed GPS Data</button>
+	</div>
 
-        function errors_action(error) {
-            switch(error.code){
-                case error.PERMISSION_DENIED: alert("Der Nutzer m&ouml;chte keine Daten teilen.");break;
-                case error.POSITION_UNAVAILABLE: alert("Die Geodaten sind nicht erreichbar.");break;
-                case error.PERMISSION_DENIED: alert("Timeout erhalten");break;
-                default: alert ("Unbekannter Error");break;
-            }
-        }
 
-        function geolocation_action(position){
-            var browserbreite = 200;
-            var karte_url = "http://maps.google.com/maps/api/staticmap?sensor=true&center="+ position.coords.latitude +","+ position.coords.longitude +"zoom=15&size="+ browserbreite +"x250&markers=color:red|label:A|"+ position.coords.latitude +","+ position.coords.longitude;
+</div>
+<!-- End of Home page -->
 
-            jQuery("#karteAktuell").remove();
-            jQuery("#karte").append(
-                jQuery(document.createElement("img")).attr("src", karte_url).attr('id','karteAktuell')
-            );
-        }
+<!-- Start of Trackwork Out page -->
+<div data-role="page" id="startTracking">
 
-    </script>
-  </head>
-  <body>
-      <div data-role="page" id="startseite">
-          <div data-role="header" data-position="fixed">
-              <h1>MyStandort</h1>
-          </div>
-          <div data-role="content">
-              <p>Hier k&ouml;nnen sie ihren Standort einchecken. Viel Spa&szlig; dabei !</p>
-          </div>
-          <div data-role="footer" data-position="fixed">
-              <div data-role="navbar">
-                  <ul>
-                      <li><a href="#startseite" class="ui-btn-active">Startseite</a></li>
-                      <li><a href="#letzterStandort">Letzter Standort</a></li>
-                      <li><a href="#einchecken">Einchecken</a></li>
-                  </ul>
-              </div>
-          </div>
-      </div>
-            <div data-role="page" id="letzterStandort">
-          <div data-role="header" data-position="fixed">
-              <h1>MyStandort</h1>
-          </div>
-          <div data-role="content">
-              <h3>Lassen sie sich ihren letzten Standort anzeigen:</h3>
-              <p><a href="#" data-role="button" id="letzterStandortanzeigen">Anzeigen</a></p>
-          </div>
-          <div data-role="footer" data-position="fixed">
-              <div data-role="navbar">
-                  <ul>
-                      <li><a href="#startseite">Startseite</a></li>
-                      <li><a href="#letzterStandort" class="ui-btn-active">Letzter Standort</a></li>
-                      <li><a href="#einchecken">Einchecken</a></li>
-                  </ul>
-              </div>
-          </div>
-      </div>
-            <div data-role="page" id="einchecken">
-          <div data-role="header" data-position="fixed">
-              <h1>MyStandort</h1>
-          </div>
-          <div data-role="content">
-              <h3>Checken sie hier ihren derzeitigen Standort ein:</h3>
-              <p><a href="#" data-role="button" id="btneinchecken">Einchecken</a></p>
-              <div id="karte"></div>
-          </div>
-          <div data-role="footer" data-position="fixed">
-              <div data-role="navbar">
-                  <ul>
-                      <li><a href="#startseite">Startseite</a></li>
-                      <li><a href="#letzterStandort">Letzter Standort</a></li>
-                      <li><a href="#einchecken" class="ui-btn-active">Einchecken</a></li>
-                  </ul>
-              </div>
-          </div>
-      </div>
-  </body>
+	<div data-role="header">
+		<h1>Track Workout</h1>
+		
+		<div data-role="navbar">
+			<ul>
+				<li><a href="#home" data-transition="none" data-icon="home">Home</a></li>
+				<li><a href="#startTracking" data-transition="none" data-icon="plus">Track Workout</a></li>
+				<li><a href="#history" data-transition="none" data-icon="star">History</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div data-role="content">	
+		<p id="startTracking_status"></p>
+			<div data-role="fieldcontain" class="ui-hide-label">
+				<label for="track_id">Track ID/Name:</label>
+				<input type="text" name="track_id" id="track_id" placeholder="Workout ID/Name"/>
+			</div>
+
+		<button data-role="button" id="startTracking_start">Start Tracking</button>
+		<button data-role="button" id="startTracking_stop">Stop Tracking</button>  
+		
+				<p id="startTracking_info"></p>
+		
+		
+	</div>
+
+
+</div><!-- /page -->
+
+<!-- Start of the History page -->
+<div data-role="page" id="history">
+
+    <div data-role="header">
+        <h1>History</h1>
+        
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#home" data-transition="none" data-icon="home">Home</a></li>
+                <li><a href="#startTracking" data-transition="none" data-icon="plus">Track Workout</a></li>
+                <li><a href="#history" data-transition="none" data-icon="star">History</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div data-role="content">	
+        <p id="tracks_recorded"></p>
+        
+        <ul data-role="listview" id="history_tracklist">
+
+        </ul>
+    </div>
+
+
+</div><!-- /page -->
+
+<!-- Track Info page -->
+<div data-role="page" id="track_info">
+
+	<div data-role="header">
+		<h1>Viewing Single Workout</h1>
+		
+		<div data-role="navbar">
+			<ul>
+				<li><a href="#home" data-transition="none" data-icon="home">Home</a></li>
+				<li><a href="#startTracking" data-transition="none" data-icon="plus">Track Workout</a></li>
+				<li><a href="#history" data-transition="none" data-icon="star">History</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div data-role="content">	
+		<p id="track_info_info"></p>
+		
+		<div id="map_canvas" style="position:absolute;bottom:0;left:0;width:100%;height:300px;"></div>
+		
+	</div>
+
+
+</div><!-- /page -->
+
+
+</body>
 </html>
