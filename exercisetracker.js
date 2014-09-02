@@ -127,6 +127,8 @@ $('#track_info').live('pageshow', function(){
 	
 	// Turn the stringified GPS data back into a JS object
 	data = JSON.parse(data);
+  
+  alert(data);
 
 	// Calculate the total distance travelled
 	total_km = 0;
