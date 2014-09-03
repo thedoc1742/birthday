@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+    <widget xmlns = "http://www.w3.org/ns/widgets"
+        xmlns:gap = "http://phonegap.com/ns/1.0"
+        id        = "de.docrichter.sara.birthday.app"
+        versionCode="001" 
+        version   = "0.0.1">
+
+    <!-- versionCode is optional and Android only -->
+
+    <name>Saras Birthday App</name>
+    
+    <preference name="phonegap-version" value="3.5.0" />
+
+    <description>
+        Die mobile Schatzsuche 
+    </description>
+
+    <author href="http://www.doc-richter.de" email="raphael@doc-richter.de">
+        Dr. Raphael Richter 
+    </author>
+
+    <!--
+      If you do not want any permissions to be added to your app, add the
+      following tag to your config.xml; you will still have the INTERNET
+      permission on your app, which PhoneGap requires.
+    -->
+    
+    <preference name="permissions" value="none"/>
+    <preference name="SplashScreenDelay" value="3000" />
+    <preference name="android-minSdkVersion" value="11" />
+
+    <!-- to enable individual permissions use the following examples -->
+    
+    <access origin="*" />
+    
+    <gap:splash src="splashportrait.png" gap:platform="android" gap:qualifier="normal-port" />
+    <gap:splash src="splashlandscape.png" gap:platform="android" gap:qualifier="normal-land" />
+    
+    
+    <gap:platform name="android" />
+ 
+    <gap:plugin name="org.apache.cordova.device" />
+    
+</widget>
