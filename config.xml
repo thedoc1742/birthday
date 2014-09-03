@@ -25,6 +25,8 @@
       permission on your app, which PhoneGap requires.
     -->
     
+    <icon src="icon.png" />
+    
     <preference name="permissions" value="none"/>
     <preference name="SplashScreenDelay" value="3000" />
     <preference name="android-minSdkVersion" value="11" />
@@ -33,12 +35,13 @@
     
     <access origin="*" />
     
-    <gap:splash src="splashportrait.png" gap:platform="android" gap:qualifier="normal-port" />
-    <gap:splash src="splashlandscape.png" gap:platform="android" gap:qualifier="normal-land" />
+    <gap:splash src="images/splashportrait.png" gap:platform="android" gap:qualifier="normal-port" />
+    <gap:splash src="images/splashlandscape.png" gap:platform="android" gap:qualifier="normal-land" />
     
     
     <gap:platform name="android" />
  
     <gap:plugin name="org.apache.cordova.device" />
+    <gap:plugin name="org.apache.cordova.geolocation" version="0.3.7" />
     
 </widget>
