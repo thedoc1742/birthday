@@ -2,8 +2,8 @@
     <widget xmlns = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "de.docrichter.sara.birthday.app"
-        versionCode="002" 
-        version   = "0.0.2">
+        versionCode="003" 
+        version   = "0.0.3">
 
     <!-- versionCode is optional and Android only -->
 
@@ -35,8 +35,8 @@
     
     <access origin="*" />
     
-    <gap:splash src="images/splashportrait.png" gap:platform="android" gap:qualifier="normal-port" />
-    <gap:splash src="images/splashlandscape.png" gap:platform="android" gap:qualifier="normal-land" />
+    <gap:splash src="splashportrait.png" gap:platform="android" gap:qualifier="normal-port" />
+    <gap:splash src="splashlandscape.png" gap:platform="android" gap:qualifier="normal-land" />
     
     
     <gap:platform name="android" />
