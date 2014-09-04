@@ -35,8 +35,8 @@
     
     <access origin="*" />
     
-    <gap:splash src="images/splashportrait.png" gap:platform="android" gap:qualifier="normal-port" />
-    <gap:splash src="images/splashlandscape.png" gap:platform="android" gap:qualifier="normal-land" />
+    <gap:splash src="splashportrait.png" gap:platform="android" gap:qualifier="normal-port" />
+    <gap:splash src="splashlandscape.png" gap:platform="android" gap:qualifier="normal-land" />
     
     
     <gap:platform name="android" />
