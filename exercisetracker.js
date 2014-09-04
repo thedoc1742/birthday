@@ -176,11 +176,47 @@ $('#track_info').live('pageshow', function(){
 	var myOptions = {
       zoom: 15,
       center: myLatLng,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
+      mapTypeControlOptions: {
+         mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'custom_style']
+      },
+  
+      mapTypeId: 'custom_style'
     };
+
+    var featureOpts = [
+    {
+      stylers: [
+        { hue: '#890000' },
+        { visibility: 'simplified' },
+        { gamma: 0.5 },
+        { weight: 0.5 }
+      ]
+    },
+    {
+      elementType: 'labels',
+      stylers: [
+        { visibility: 'off' }
+      ]
+    },
+    {
+      featureType: 'water',
+      stylers: [
+        { color: '#890000' }
+      ]
+    }
+  ];
+
 
     // Create the Google Map, set options
     var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+
+    var styledMapOptions = {
+      name: 'Custom Style'
+    };
+
+    var customMapType = new google.maps.StyledMapType(featureOpts, styledMapOptions);
+
+    map.mapTypes.set('custom_style', customMapType);
 
     var trackCoords = [];
     
@@ -199,6 +235,5 @@ $('#track_info').live('pageshow', function(){
 
     // Apply the line to the map
     trackPath.setMap(map);
-   
 		
 });
