@@ -185,26 +185,50 @@ $('#track_info').live('pageshow', function(){
 
     var featureOpts = [
     {
-      stylers: [
-        { hue: '#890000' },
-        { visibility: 'simplified' },
-        { gamma: 0.5 },
-        { weight: 0.5 }
-      ]
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
     },
     {
-      elementType: 'labels',
-      stylers: [
-        { visibility: 'off' }
-      ]
+        "featureType": "water",
+        "stylers": [
+            {
+                "visibility": "on"
+            },
+            {
+                "color": "#2f343b"
+            }
+        ]
     },
     {
-      featureType: 'water',
-      stylers: [
-        { color: '#890000' }
-      ]
+        "featureType": "landscape",
+        "stylers": [
+            {
+                "visibility": "on"
+            },
+            {
+                "color": "#703030"
+            }
+        ]
+    },
+    {
+        "featureType": "administrative",
+        "elementType": "geometry.stroke",
+        "stylers": [
+            {
+                "visibility": "on"
+            },
+            {
+                "color": "#2f343b"
+            },
+            {
+                "weight": 1
+            }
+        ]
     }
-  ];
+];
 
 
     // Create the Google Map, set options
