@@ -184,50 +184,24 @@ $('#track_info').live('pageshow', function(){
     };
 
     var featureOpts = [
-    {
-        "stylers": [
-            {
-                "visibility": "off"
-            }
-        ]
-    },
-    {
-        "featureType": "water",
-        "stylers": [
-            {
-                "visibility": "on"
-            },
-            {
-                "color": "#2f343b"
-            }
-        ]
-    },
-    {
-        "featureType": "landscape",
-        "stylers": [
-            {
-                "visibility": "on"
-            },
-            {
-                "color": "#703030"
-            }
-        ]
-    },
-    {
-        "featureType": "administrative",
-        "elementType": "geometry.stroke",
-        "stylers": [
-            {
-                "visibility": "on"
-            },
-            {
-                "color": "#2f343b"
-            },
-            {
-                "weight": 1
-            }
-        ]
-    }
+  {
+    "stylers": [
+      { "color": "#a58080" },
+      { "visibility": "simplified" }
+    ]
+  },{
+    "featureType": "road",
+    "stylers": [
+      { "visibility": "simplified" },
+      { "color": "#de80b8" }
+    ]
+  },{
+    "featureType": "road.local",
+    "elementType": "geometry",
+    "stylers": [
+      { "visibility": "on" }
+    ]
+  }
 ];
 
 
