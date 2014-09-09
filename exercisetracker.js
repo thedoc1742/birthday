@@ -38,7 +38,7 @@ var iconbirthdaymarkerimage = {
     // The origin for this image is 0,0.
     origin: new google.maps.Point(0,0),
     // The anchor for this image is the base of the flagpole at 0,32.
-    anchor: new google.maps.Point(0, 32)
+    anchor: new google.maps.Point(16, 16)
 };
 
 var meicon = {
@@ -58,81 +58,8 @@ var iconbirthdayschatzimage = {
     // The origin for this image is 0,0.
     origin: new google.maps.Point(0,0),
     // The anchor for this image is the base of the flagpole at 0,32.
-    anchor: new google.maps.Point(0, 50)
+    anchor: new google.maps.Point(25, 25)
 };
-
-
-$("#startTracking_start").live('click', function(){
-	// Start tracking the User
-    watch_id = navigator.geolocation.watchPosition(
-    
-    	// Success
-        function(position){
-            window.tracking_data.push(position);
-            console.log(window.tracking_data);
-        },
-        
-        // Error
-        function(error){
-            console.log(error);
-        },
-        
-        // Settings
-        { frequency: 3000, maximumAge: 3000, enableHighAccuracy: true });
-    
-    // Tidy up the UI
-    track_id = $("#track_id").val();
-    
-    $("#track_id").hide();
-    
-    $("#startTracking_status").html("Tracking workout: <strong>" + track_id + window.tracking_data + "</strong>");
-});
-
-$("#startTracking_stop").live('click', function(){
-	
-	// Stop tracking the user
-  navigator.geolocation.clearWatch(watch_id);
-	
-  console.log(window.tracking_data);	
-	// Save the tracking data
-	window.localStorage.setItem(track_id, JSON.stringify(window.tracking_data));
-
-	// Reset watch_id and window.tracking_data 
-	watch_id = null;
-	window.tracking_data = [];
-
-	// Tidy up the UI
-	$("#track_id").val("").show();
-	
-	$("#startTracking_status").html("Stopped tracking workout: <strong>" + track_id + "</strong>");
-
-});
-
-$("#home_clearstorage_button").live('click', function(){
-	window.localStorage.clear();
-});
-
-$("#home_seedgps_button").live('click', function(){
-
-    watch_id = navigator.geolocation.watchPosition(
-    
-    	// Success
-        function(position){
-            window.tracking_data.push(position);
-            window.localStorage.setItem('Sample block', JSON.stringify(window.tracking_data));
-        },
-        
-        // Error
-        function(error){
-            console.log(error);
-        },
-        
-        // Settings
-        { frequency: 3000, maximumAge: 3000, enableHighAccuracy: true });
-  
-     window.tracking_data = [];
-	
-});
 
 $('#newhome').live("pagebeforeshow", function() {
 
@@ -230,6 +157,13 @@ $('#newhome').live("pagebeforeshow", function() {
                  map: map,
                  title: marker.title,
                  icon: seticon
+               });
+               
+               var infowindow = new google.maps.InfoWindow({
+                map: map,
+                position: markerposition,
+                content: '<div style="width:170px; height:20px">'+marker.content+'</div>',
+                maxWidth: 2000
                });
               
               birthdaymarkers.push(m);
