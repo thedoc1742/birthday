@@ -23,6 +23,7 @@
 		<div data-role="navbar">
 			<ul>
 				<li><a href="#home" data-transition="none" data-icon="home">Home</a></li>
+				<li><a href="#newhome" data-transition="none" data-icon="grid">Show Map</a></li>
 				<li><a href="#startTracking" data-transition="none" data-icon="plus">Track Workout</a></li>
 				<li><a href="#history" data-transition="none" data-icon="star">History</a></li>
 			</ul>
@@ -37,6 +38,19 @@
 		<button id="home_seedgps_button">Load Seed GPS Data</button>
 	</div>
 
+
+</div>
+<div data-role="page" id="newhome" style="width:100%;height:100%;padding:0;position:absolute;">
+  <div data-role="header">
+		<h1>Schatzsuche</h1>
+	  <div data-role="navbar">
+			<ul>
+				<li><a href="#home" data-transition="none" data-icon="home">Home</a></li>
+			</ul>
+		</div>
+	</div>          
+	<div data-role="content" id="google_map" style="width:100%;height:100%;padding:0;position:absolute;"/>
+	
 
 </div>
 <!-- End of Home page -->
