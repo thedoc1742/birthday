@@ -40,6 +40,17 @@ var iconbirthdaymarkerimage = {
     // The anchor for this image is the base of the flagpole at 0,32.
     anchor: new google.maps.Point(0, 32)
 };
+
+var meicon = {
+    url: 'group.png',
+    // This marker is 20 pixels wide by 32 pixels tall.
+    size: new google.maps.Size(60, 35),
+    // The origin for this image is 0,0.
+    origin: new google.maps.Point(0,0),
+    // The anchor for this image is the base of the flagpole at 0,32.
+    anchor: new google.maps.Point(0, 35)
+};
+
 var iconbirthdayschatzimage = {
     url: 'schatz.png',
     // This marker is 20 pixels wide by 32 pixels tall.
@@ -199,7 +210,8 @@ $('#newhome').live("pagebeforeshow", function() {
             marker = new google.maps.Marker({
                position: latLng,
                map: map,
-               title: 'Da bin ich!'
+               icon: meicon,
+               title: 'Da sind wir!'
             });
             
             $.getJSON( 'http://www.doc-richter.de/geo/birthday.json', function(data) { 
