@@ -28,6 +28,28 @@ document.addEventListener("deviceready", function(){
 var track_id = '';      // Name/ID of the exercise
 var watch_id = null;    // ID of the geolocation
 window.tracking_data = []; // Array containing GPS position objects
+var birthdaymarkers = [];
+var map = null;
+var marker = null;
+var iconbirthdaymarkerimage = {
+    url: 'icon_birthday.png',
+    // This marker is 20 pixels wide by 32 pixels tall.
+    size: new google.maps.Size(20, 30),
+    // The origin for this image is 0,0.
+    origin: new google.maps.Point(0,0),
+    // The anchor for this image is the base of the flagpole at 0,32.
+    anchor: new google.maps.Point(0, 30)
+};
+var iconbirthdayschatzimage = {
+    url: 'schatz.png',
+    // This marker is 20 pixels wide by 32 pixels tall.
+    size: new google.maps.Size(50, 50),
+    // The origin for this image is 0,0.
+    origin: new google.maps.Point(0,0),
+    // The anchor for this image is the base of the flagpole at 0,32.
+    anchor: new google.maps.Point(0, 50)
+};
+
 
 $("#startTracking_start").live('click', function(){
 	// Start tracking the User
@@ -99,6 +121,172 @@ $("#home_seedgps_button").live('click', function(){
   
      window.tracking_data = [];
 	
+});
+
+$('#newhome').live("pagebeforeshow", function() {
+
+        navigator.geolocation.getCurrentPosition(function(position){
+
+            //showMap('mapHome',position.coords.latitude, position.coords.longitude);// Canvas, lat, long
+
+            var latLng = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+
+            // Google Map options
+            var myOptions = {
+                mapTypeControlOptions: {
+                },zoom: 17,
+                //zoomControl   : 1,
+                center: latLng,
+                mapTypeId: 'Birthday Style'////ROADMAP, SATELLITE, HYBRID and TERRAIN
+            };      
+
+            // Create the Google Map, set options
+            map = new google.maps.Map(document.getElementById('google_map'), myOptions);
+
+            marker = new google.maps.Marker({
+               position: latLng,
+               map: map,
+               title: 'Da bin ich!'
+            });
+            
+            $.getJSON( 'http://www.doc-richter.de/geo/birthday.json', function(data) { 
+            $.each( data.markers, function(i, marker) {
+              var markerposition = new google.maps.LatLng(marker.latitude,marker.longitude);
+              console.log(i+' '+markerposition);
+              var seticon = null;
+              if(marker.type == "actionpoint") {
+                seticon = iconbirthdaymarkerimage;
+              } else {
+                seticon = iconbirthdayschatzimage;
+              } 
+              
+              var m = new google.maps.Marker({
+                 position: markerposition,
+                 map: map,
+                 title: marker.title,
+                 icon: seticon
+               });
+              
+              birthdaymarkers.push(m);
+            });
+            });
+
+            var featureOpts = [
+  {
+    "stylers": [
+      { "color": "#a58080" },
+      { "visibility": "simplified" }
+    ]
+  },{
+    "featureType": "road",
+    "stylers": [
+      { "visibility": "simplified" },
+      { "color": "#de80b8" }
+    ]
+  },{
+    "featureType": "road.local",
+    "elementType": "geometry",
+    "stylers": [
+      { "visibility": "on" }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "labels",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },{
+    "featureType": "poi",
+    "elementType": "labels",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },{
+    "featureType": "transit",
+    "elementType": "labels",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  }
+  
+];
+
+
+
+    var styledMapOptions = {
+      name: 'Birthday Style'
+    };
+
+    var customMapType = new google.maps.StyledMapType(featureOpts, styledMapOptions);
+
+    map.mapTypes.set('Birthday Style', customMapType);
+
+            //addMarker(position.coords.latitude,position.coords.longitude);
+
+        }, 
+        showError, 
+        {
+
+                enableHighAccuracy  : true,
+                maximumAge          : 2000
+                //maximumAge:Infinity
+        });
+})  
+
+$('#newhome').live("pageshow", function() {
+
+        // Place and move the marker regarding to my position and deplacement
+    
+        //var track_id = "me";
+        watch_id = navigator.geolocation.watchPosition(
+        // Success
+        function(position){
+
+            var lat = position.coords.latitude;
+            var long = position.coords.longitude;
+
+            var latLng = new google.maps.LatLng(lat,long);
+            
+            moveMe(map,marker,latLng);
+            
+        },
+        // Error
+        showError,
+        { 
+            frequency: 1000
+
+        });
+
+        console.log('HW : WatchPosition called. Id:' + watch_id);
+
+})
+
+function moveMe( map, marker, position ) {
+
+    marker.setPosition(position);
+    map.panTo(position);
+
+};
+
+function showError() {
+
+    alert("Error!!");
+
+};
+
+$('#newhome').live("pagebeforehide", function() {
+
+        //track_id = "me";
+
+        // Stop tracking the user
+
+        if (watch_id != null) {
+            navigator.geolocation.clearWatch(watch_id);
+        }
+
+
+        //navigator.geolocation.clearWatch(Tracking.watch_id);
 });
 
 // When the user views the history page
@@ -174,60 +362,33 @@ $('#track_info').live('pageshow', function(){
 
 	// Google Map options
 	var myOptions = {
+      mapTypeControlOptions: {
+              mapTypeIds: ['custom_style']
+      },
       zoom: 15,
       center: myLatLng,
-      mapTypeControlOptions: {
-         mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'custom_style']
-      },
-  
       mapTypeId: 'custom_style'
     };
 
     var featureOpts = [
-    {
-        "stylers": [
-            {
-                "visibility": "off"
-            }
-        ]
-    },
-    {
-        "featureType": "water",
-        "stylers": [
-            {
-                "visibility": "on"
-            },
-            {
-                "color": "#2f343b"
-            }
-        ]
-    },
-    {
-        "featureType": "landscape",
-        "stylers": [
-            {
-                "visibility": "on"
-            },
-            {
-                "color": "#703030"
-            }
-        ]
-    },
-    {
-        "featureType": "administrative",
-        "elementType": "geometry.stroke",
-        "stylers": [
-            {
-                "visibility": "on"
-            },
-            {
-                "color": "#2f343b"
-            },
-            {
-                "weight": 1
-            }
-        ]
-    }
+  {
+    "stylers": [
+      { "color": "#a58080" },
+      { "visibility": "simplified" }
+    ]
+  },{
+    "featureType": "road",
+    "stylers": [
+      { "visibility": "simplified" },
+      { "color": "#de80b8" }
+    ]
+  },{
+    "featureType": "road.local",
+    "elementType": "geometry",
+    "stylers": [
+      { "visibility": "on" }
+    ]
+  }
 ];
 
 
@@ -235,7 +396,7 @@ $('#track_info').live('pageshow', function(){
     var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 
     var styledMapOptions = {
-      name: 'Custom Style'
+      name: 'Birthday Style'
     };
 
     var customMapType = new google.maps.StyledMapType(featureOpts, styledMapOptions);
@@ -261,3 +422,4 @@ $('#track_info').live('pageshow', function(){
     trackPath.setMap(map);
 		
 });
+
