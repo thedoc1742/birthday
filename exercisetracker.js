@@ -44,11 +44,11 @@ var iconbirthdaymarkerimage = {
 var meicon = {
     url: 'group.png',
     // This marker is 20 pixels wide by 32 pixels tall.
-    size: new google.maps.Size(40, 40),
+    size: new google.maps.Size(60, 60),
     // The origin for this image is 0,0.
     origin: new google.maps.Point(0,0),
     // The anchor for this image is the base of the flagpole at 0,32.
-    anchor: new google.maps.Point(20, 20)
+    anchor: new google.maps.Point(30, 30)
 };
 
 var iconbirthdayschatzimage = {
