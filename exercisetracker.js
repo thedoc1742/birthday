@@ -210,6 +210,7 @@ $('#newhome').live("pageshow", function() {
               $('#marker'+i).html(''+gps_distance(lat,lon,birthdaymarkerpositions[i].coords.latitude,birthdaymarkerpositions[i].coords.longitude));
             }            
             console.log('Draussen');
+            $('#marker0').html('Tralala '+latT+' -- '+longT);
             
         },
         // Error
