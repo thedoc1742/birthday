@@ -215,7 +215,7 @@ $('#newhome').live("pageshow", function() {
               console.log('Drin '+i+' '+birthdaymarkerpositions[i].lat()+' '+birthdaymarkerpositions[i].lng()+' '+dist);
               $('#marker'+i).html('Entfernung: '+dist+' m');
               if(dist < 300)
-                birthdayinfowindows[i].open();
+                birthdayinfowindows[i].open(map);
               else
                 birthdayinfowindows[i].close();
               
