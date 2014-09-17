@@ -64,6 +64,13 @@ var iconbirthdayschatzimage = {
     anchor: new google.maps.Point(25, 25)
 };
 
+$.getJSON( 'http://www.doc-richter.de/geo/birthday.json', function(data) { 
+            $.each( data.markers, function(i, marker) {
+              var markerposition = new google.maps.LatLng(marker.latitude,marker.longitude);
+              birthdaymarkerpositions.push(markerposition);
+            })
+});
+
 $('#newhome').live("pagebeforeshow", function() {
 
         navigator.geolocation.getCurrentPosition(function(position){
@@ -170,10 +177,8 @@ $('#newhome').live("pagebeforeshow", function() {
                });
               
               birthdaymarkers.push(m);
-              birthdaymarkerpositions.push(markerposition);
               birthdayinfowindows.push(infowindow);
               
-              console.log(birthdaymarkerpositions);
               
             });
             });
@@ -205,12 +210,12 @@ $('#newhome').live("pageshow", function() {
             moveMe(map,marker,latLng);
             console.log('MOVEd');
             console.log(birthdaymarkerpositions);
-            for(i = 0; i<birthdaymarkerpositions.size; i++) {
+            for(i = 0; i<birthdaymarkerpositions.length; i++) {
               console.log('Drin '+i);
-              $('#marker'+i).html(''+gps_distance(lat,lon,birthdaymarkerpositions[i].coords.latitude,birthdaymarkerpositions[i].coords.longitude));
+              $('#marker'+i).html(''+gps_distance(latT,longT,birthdaymarkerpositions[i].lat,birthdaymarkerpositions[i].lng));
             }            
             console.log('Draussen');
-            $('#marker0').html('Tralala '+latT+' -- '+longT);
+            
             
         },
         // Error
