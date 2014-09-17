@@ -12,7 +12,7 @@ function gps_distance(lat1, lon1, lat2, lon2)
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
     var d = R * c;
     
-    return d;
+    return Math.round(d*1000);
 }
 
 document.addEventListener("deviceready", function(){
@@ -172,7 +172,7 @@ $('#newhome').live("pagebeforeshow", function() {
                var infowindow = new google.maps.InfoWindow({
                 map: map,
                 position: markerposition,
-                content: '<div style="width:170px; height:20px">'+marker.content+'</div><div id="marker'+i+'">xxx</div>',
+                content: '<div id="marker'+i+'"></div>',
                 maxWidth: 2000
                });
               
@@ -211,8 +211,8 @@ $('#newhome').live("pageshow", function() {
             console.log('MOVEd');
             console.log(birthdaymarkerpositions);
             for(i = 0; i<birthdaymarkerpositions.length; i++) {
-              console.log('Drin '+i);
-              $('#marker'+i).html(''+gps_distance(latT,longT,birthdaymarkerpositions[i].lat,birthdaymarkerpositions[i].lng));
+              console.log('Drin '+i+' '+birthdaymarkerpositions[i].lat()+' '+birthdaymarkerpositions[i].lng()+' '+gps_distance(latT,longT,birthdaymarkerpositions[i].lat(),birthdaymarkerpositions[i].lng()));
+              $('#marker'+i).html('Entfernung: '+gps_distance(latT,longT,birthdaymarkerpositions[i].lat,birthdaymarkerpositions[i].lng)+' m');
             }            
             console.log('Draussen');
             
