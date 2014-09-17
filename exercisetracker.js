@@ -90,9 +90,8 @@ $('#newhome').live("pagebeforeshow", function() {
 
             // Create the Google Map, set options
             map = new google.maps.Map(document.getElementById('google_map'), myOptions);
-
             
-
+            
             var featureOpts = [
   {
     "stylers": [
@@ -172,13 +171,13 @@ $('#newhome').live("pagebeforeshow", function() {
                var infowindow = new google.maps.InfoWindow({
                 map: map,
                 position: markerposition,
-                content: '<div>Halalalalalalalalalalalalalalal</div><div id="marker'+i+'">xxx</div>',
+                content: '<div id="marker'+i+'">xxx</div>',
                 maxWidth: 2000
                });
               
               birthdaymarkers.push(m);
               birthdayinfowindows.push(infowindow);
-              
+              infowindow.close();
               
             });
             });
@@ -210,10 +209,13 @@ $('#newhome').live("pageshow", function() {
             moveMe(map,marker,latLng);
             console.log('MOVEd');
             console.log(birthdaymarkerpositions);
+            console.log(birthdayinfowindows);
             for(i = 0; i<birthdaymarkerpositions.length; i++) {
               var dist = gps_distance(latT,longT,birthdaymarkerpositions[i].lat(),birthdaymarkerpositions[i].lng());
               console.log('Drin '+i+' '+birthdaymarkerpositions[i].lat()+' '+birthdaymarkerpositions[i].lng()+' '+dist);
               $('#marker'+i).html('Entfernung: '+dist+' m');
+              if(dist < 300)
+                window.birthdayinfowindows[i].open();
             }            
             console.log('Draussen');
             
