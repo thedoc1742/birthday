@@ -173,6 +173,8 @@ $('#newhome').live("pagebeforeshow", function() {
               birthdaymarkerpositions.push(markerposition);
               birthdayinfowindows.push(infowindow);
               
+              console.log(birthdaymarkerpositions);
+              
             });
             });
 
@@ -187,7 +189,7 @@ $('#newhome').live("pagebeforeshow", function() {
 })  
 
 $('#newhome').live("pageshow", function() {
-
+        
         // Place and move the marker regarding to my position and deplacement
     
         //var track_id = "me";
@@ -201,9 +203,13 @@ $('#newhome').live("pageshow", function() {
             var latLng = new google.maps.LatLng(latT,longT);
             
             moveMe(map,marker,latLng);
-            for(i = 0; i<birthdaymarkerpositions.length; i++) {
-              $('#marker'+i).html(''+gps_distance(lat,lon,markerpositions[i].coords.latitude,markerpositions[i].coords.longitude));
+            console.log('MOVEd');
+            console.log(birthdaymarkerpositions);
+            for(i = 0; i<birthdaymarkerpositions.size; i++) {
+              console.log('Drin '+i);
+              $('#marker'+i).html(''+gps_distance(lat,lon,birthdaymarkerpositions[i].coords.latitude,birthdaymarkerpositions[i].coords.longitude));
             }            
+            console.log('Draussen');
             
         },
         // Error
