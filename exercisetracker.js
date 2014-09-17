@@ -213,11 +213,11 @@ $('#newhome').live("pageshow", function() {
             for(i = 0; i<birthdaymarkerpositions.length; i++) {
               var dist = gps_distance(latT,longT,birthdaymarkerpositions[i].lat(),birthdaymarkerpositions[i].lng());
               console.log('Drin '+i+' '+birthdaymarkerpositions[i].lat()+' '+birthdaymarkerpositions[i].lng()+' '+dist);
-              $('#marker'+i).html('Entfernung: '+dist+' m');
               if(dist < 300)
                 birthdayinfowindows[i].open(map);
               else
                 birthdayinfowindows[i].close();
+              $('#marker'+i).html('Entfernung: '+dist+' m');
               
             }            
             console.log('Draussen');
