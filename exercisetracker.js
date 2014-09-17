@@ -172,7 +172,7 @@ $('#newhome').live("pagebeforeshow", function() {
                var infowindow = new google.maps.InfoWindow({
                 map: map,
                 position: markerposition,
-                content: '<div id="marker'+i+'"></div>',
+                content: '<div>Halalalalalalalalalalalalalalal</div><div id="marker'+i+'">xxx</div>',
                 maxWidth: 2000
                });
               
@@ -211,10 +211,12 @@ $('#newhome').live("pageshow", function() {
             console.log('MOVEd');
             console.log(birthdaymarkerpositions);
             for(i = 0; i<birthdaymarkerpositions.length; i++) {
-              console.log('Drin '+i+' '+birthdaymarkerpositions[i].lat()+' '+birthdaymarkerpositions[i].lng()+' '+gps_distance(latT,longT,birthdaymarkerpositions[i].lat(),birthdaymarkerpositions[i].lng()));
-              $('#marker'+i).html('Entfernung: '+gps_distance(latT,longT,birthdaymarkerpositions[i].lat,birthdaymarkerpositions[i].lng)+' m');
+              var dist = gps_distance(latT,longT,birthdaymarkerpositions[i].lat(),birthdaymarkerpositions[i].lng());
+              console.log('Drin '+i+' '+birthdaymarkerpositions[i].lat()+' '+birthdaymarkerpositions[i].lng()+' '+dist);
+              $('#marker'+i).html('Entfernung: '+dist+' m');
             }            
             console.log('Draussen');
+            
             
             
         },
