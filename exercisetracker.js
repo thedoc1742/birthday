@@ -177,7 +177,7 @@ $('#newhome').live("pagebeforeshow", function() {
               
               birthdaymarkers.push(m);
               birthdayinfowindows.push(infowindow);
-              infowindow.close();
+              
               
             });
             });
@@ -215,7 +215,7 @@ $('#newhome').live("pageshow", function() {
               console.log('Drin '+i+' '+birthdaymarkerpositions[i].lat()+' '+birthdaymarkerpositions[i].lng()+' '+dist);
               $('#marker'+i).html('Entfernung: '+dist+' m');
               if(dist < 300)
-                birthdayinfowindows[i].open();
+                birthdayinfowindows[i].close();
             }            
             console.log('Draussen');
             
