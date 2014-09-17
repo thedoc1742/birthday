@@ -29,8 +29,11 @@ var track_id = '';      // Name/ID of the exercise
 var watch_id = null;    // ID of the geolocation
 window.tracking_data = []; // Array containing GPS position objects
 var birthdaymarkers = [];
+var birthdayinfowindows = [];
+var birthdaymarkerpositions = [];
 var map = null;
 var marker = null;
+
 var iconbirthdaymarkerimage = {
     url: 'icon_birthday.png',
     // This marker is 20 pixels wide by 32 pixels tall.
@@ -162,11 +165,16 @@ $('#newhome').live("pagebeforeshow", function() {
                var infowindow = new google.maps.InfoWindow({
                 map: map,
                 position: markerposition,
-                content: '<div style="width:170px; height:20px">'+marker.content+'</div>',
+                content: '<div style="width:170px; height:20px">'+marker.content+'</div><div id="marker'+i+'></div>',
                 maxWidth: 2000
                });
               
               birthdaymarkers.push(m);
+              birthdaymarkerpositions.push(markerposition);
+              birthdayinfowindows.push(infowindow);
+              
+              console.log(birthdaymarkerpositions);
+              
             });
             });
 
@@ -181,7 +189,7 @@ $('#newhome').live("pagebeforeshow", function() {
 })  
 
 $('#newhome').live("pageshow", function() {
-
+        
         // Place and move the marker regarding to my position and deplacement
     
         //var track_id = "me";
@@ -189,12 +197,19 @@ $('#newhome').live("pageshow", function() {
         // Success
         function(position){
 
-            var lat = position.coords.latitude;
-            var long = position.coords.longitude;
+            var latT = position.coords.latitude;
+            var longT = position.coords.longitude;
 
-            var latLng = new google.maps.LatLng(lat,long);
+            var latLng = new google.maps.LatLng(latT,longT);
             
             moveMe(map,marker,latLng);
+            console.log('MOVEd');
+            console.log(birthdaymarkerpositions);
+            for(i = 0; i<birthdaymarkerpositions.size; i++) {
+              console.log('Drin '+i);
+              $('#marker'+i).html(''+gps_distance(lat,lon,birthdaymarkerpositions[i].coords.latitude,birthdaymarkerpositions[i].coords.longitude));
+            }            
+            console.log('Draussen');
             
         },
         // Error
