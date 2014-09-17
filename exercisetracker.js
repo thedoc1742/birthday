@@ -165,7 +165,7 @@ $('#newhome').live("pagebeforeshow", function() {
                var infowindow = new google.maps.InfoWindow({
                 map: map,
                 position: markerposition,
-                content: '<div style="width:170px; height:20px">'+marker.content+'</div><div id="marker'+i+'></div>',
+                content: '<div style="width:170px; height:20px">'+marker.content+'</div><div id="marker'+i+'">xxx</div>',
                 maxWidth: 2000
                });
               
