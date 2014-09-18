@@ -34,6 +34,8 @@ var birthdaymarkerpositions = [];
 var map = null;
 var marker = null;
 var distnext = null;
+var nextmarker = null;
+var nextmarkerposition = null;
 
 var iconbirthdaymarkerimage = {
     url: 'icon_birthday.png',
@@ -65,14 +67,24 @@ var iconbirthdayschatzimage = {
     anchor: new google.maps.Point(25, 25)
 };
 
-$.getJSON( 'http://www.doc-richter.de/geo/birthday.json', function(data) { 
+window.localStorage.setItem('nextmarker', null);
+
+
+$.getJSON( 'http://www.doc-richter.de/geo/birthday.json', function(data) {
+            var setnext = false; 
             $.each( data.markers, function(i, marker) {
+              if(marker.visited == "false" && !setnext) {
+                 window.localStorage.setItem('nextmarker', JSON.stringify(marker));
+                 setnext = true;
+              }
               var markerposition = new google.maps.LatLng(marker.latitude,marker.longitude);
               birthdaymarkerpositions.push(markerposition);
             });
             var localData = JSON.stringify(data);
             window.localStorage.setItem('visitedmarkers', localData);
 });
+
+
 
 $('#newhome').live("pagebeforeshow", function() {
 
@@ -145,47 +157,12 @@ $('#newhome').live("pagebeforeshow", function() {
     var customMapType = new google.maps.StyledMapType(featureOpts, styledMapOptions);
 
     map.mapTypes.set('Birthday Style', customMapType);
-
-            marker = new google.maps.Marker({
+        marker = new google.maps.Marker({
                position: latLng,
                map: map,
                icon: meicon,
                title: 'Da sind wir!'
             });
-            
-            $.parseJSON( window.localStorage.getItem('visitedmarkers'), function(data) { 
-            $.each( data.markers, function(i, marker) {
-              var markerposition = new google.maps.LatLng(marker.latitude,marker.longitude);
-              console.log(i+' '+markerposition);
-              var seticon = null;
-              if(marker.type == "actionpoint") {
-                seticon = iconbirthdaymarkerimage;
-              } else {
-                seticon = iconbirthdayschatzimage;
-              } 
-              console.log(seticon);
-              
-              var m = new google.maps.Marker({
-                 position: markerposition,
-                 map: map,
-                 title: marker.title,
-                 icon: seticon
-               });
-               
-               var infowindow = new google.maps.InfoWindow({
-                map: map,
-                position: markerposition,
-                content: '<div id="marker'+i+'">xxx</div>',
-                maxWidth: 2000
-               });
-              
-              birthdaymarkers.push(m);
-              birthdayinfowindows.push(infowindow);
-              
-              
-            });
-            });
-
         }, 
         showError, 
         {
@@ -211,19 +188,56 @@ $('#newhome').live("pageshow", function() {
             var latLng = new google.maps.LatLng(latT,longT);
             
             moveMe(map,marker,latLng);
-            console.log('MOVEd');
-            console.log(birthdaymarkerpositions);
-            console.log(birthdayinfowindows);
-            for(i = 0; i<birthdaymarkerpositions.length; i++) {
-              var dist = gps_distance(latT,longT,birthdaymarkerpositions[i].lat(),birthdaymarkerpositions[i].lng());
-              console.log('Drin '+i+' '+birthdaymarkerpositions[i].lat()+' '+birthdaymarkerpositions[i].lng()+' '+dist);
-              if(dist < 300)
-                birthdayinfowindows[i].open(map);
-              else
-                birthdayinfowindows[i].close();
-              $('#marker'+i).html('Entfernung: '+dist+' m');
+            
+            console.log(window.localStorage.getItem('visitedmarkers'));
+            
+            vM = $.parseJSON( window.localStorage.getItem('visitedmarkers'));
+            
+            $.each( vM.markers, function(i, marker) {
+              console.log(marker);
+              if(marker.visited == "false") {
+                  var markerposition = new google.maps.LatLng(marker.latitude,marker.longitude);
+                  console.log(i+' '+markerposition);
               
-            }            
+                  var seticon = null;
+              
+                  if(marker.type == "actionpoint") {
+                    seticon = iconbirthdaymarkerimage;
+                  } else {
+                    seticon = iconbirthdayschatzimage;
+                  } 
+              
+                  console.log(seticon);
+              
+                  var m = new google.maps.Marker({
+                    position: markerposition,
+                    map: map,
+                    title: marker.title,
+                    icon: seticon
+                  });
+               
+                  window.localStorage.setItem('nextmarker', JSON.stringify(marker));
+                  return false;
+              }
+            });
+    
+            var nextMarker = JSON.parse(window.localStorage.getItem('nextmarker'));
+            var nextMarkerPosition = new google.maps.LatLng(nextMarker.latitude,nextMarker.longitude)
+            var dist = gps_distance(latT,longT,nextMarker.latitude,nextMarker.longitude);
+            console.log(nextMarker.latitude+' '+nextMarker.longitude+' '+dist);
+            if(dist < 300) {
+            
+                  var infowindow = new google.maps.InfoWindow({
+                    map: map,
+                    position: nextMarkerPosition,
+                    content: '<div id="nextmarker">'+nextMarker.title+'</div>',
+                    maxWidth: 2000
+                  });
+                  
+                  setVisited(nextMarker.id);
+                  setNextMarker(nextMarker.id+1);
+            } 
+            
             $('#distance').html(dist);
         },
         // Error
@@ -243,6 +257,30 @@ function moveMe( map, marker, position ) {
     map.panTo(position);
 
 };
+
+function setVisited(id) {
+    console.log('Set visited: '+id);
+    var jsonObj = $.parseJSON( window.localStorage.getItem('visitedmarkers'));
+    for (var i=0; i<jsonObj.markers.length; i++) {
+    console.log(jsonObj.markers[i]);
+    if (jsonObj.markers[i].id == id) {
+      jsonObj.markers[i].visited = "true";
+    }
+    }
+    window.localStorage.setItem('visitedmarkers',JSON.stringify(jsonObj));
+}
+
+function setNextMarker(id) {
+    console.log('Set next marker: '+id);
+    var jsonObj = $.parseJSON( window.localStorage.getItem('visitedmarkers'));
+    for (var i=0; i<jsonObj.markers.length; i++) {
+    if (jsonObj.markers[i].id == id) {
+      window.localStorage.setItem('nextmarker',JSON.stringify(jsonObj.markers[i]));
+      return;
+    }
+    }
+    
+}
 
 function showError() {
 
