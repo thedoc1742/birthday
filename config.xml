@@ -2,14 +2,14 @@
     <widget xmlns = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "de.docrichter.sara.birthday.app"
-        versionCode="012" 
-        version   = "0.1.2">
+        versionCode="013" 
+        version   = "0.1.3">
 
     <!-- versionCode is optional and Android only -->
 
     <name>Saras Birthday App</name>
     
-    <preference name="phonegap-version" value="3.3.0" />
+    <preference name="phonegap-version" value="3.5.0" />
 
     <description>
         Die mobile Schatzsuche 
