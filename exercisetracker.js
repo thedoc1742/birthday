@@ -68,6 +68,8 @@ var iconbirthdayschatzimage = {
 };
 
 window.localStorage.setItem('nextmarker', null);
+window.localStorage.setItem('accurancy', '10');
+
 
 
 $.getJSON( 'http://www.doc-richter.de/geo/birthday.json', function(data) {
@@ -82,6 +84,7 @@ $.getJSON( 'http://www.doc-richter.de/geo/birthday.json', function(data) {
             });
             var localData = JSON.stringify(data);
             window.localStorage.setItem('visitedmarkers', localData);
+            window.localStorage.setItem('accurancy',''+data.accurancy);
 });
 
 
@@ -222,10 +225,11 @@ $('#newhome').live("pageshow", function() {
             });
     
             var nextMarker = JSON.parse(window.localStorage.getItem('nextmarker'));
+            var acc = parseInt(window.localStorage.getItem('accurancy'));
             var nextMarkerPosition = new google.maps.LatLng(nextMarker.latitude,nextMarker.longitude)
             var dist = gps_distance(latT,longT,nextMarker.latitude,nextMarker.longitude);
             console.log(nextMarker.latitude+' '+nextMarker.longitude+' '+dist);
-            if(dist < 300) {
+            if(dist < acc) {
             
                   var infowindow = new google.maps.InfoWindow({
                     map: map,
