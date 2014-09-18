@@ -196,15 +196,12 @@ $('#newhome').live("pageshow", function() {
             
             vM = $.parseJSON( window.localStorage.getItem('visitedmarkers'));
             
-            $.each( vM.markers, function(i, marker) {
-              console.log(marker);
-              if(marker.visited == "false") {
-                  var markerposition = new google.maps.LatLng(marker.latitude,marker.longitude);
-                  console.log(i+' '+markerposition);
+            var nextMarker = JSON.parse(window.localStorage.getItem('nextmarker'));
+            
+            var markerposition = new google.maps.LatLng(nextMarker.latitude,nextMarker.longitude);
+            var seticon = null;
               
-                  var seticon = null;
-              
-                  if(marker.type == "actionpoint") {
+                  if(nextMarker.type == "actionpoint") {
                     seticon = iconbirthdaymarkerimage;
                   } else {
                     seticon = iconbirthdayschatzimage;
@@ -215,16 +212,11 @@ $('#newhome').live("pageshow", function() {
                   var m = new google.maps.Marker({
                     position: markerposition,
                     map: map,
-                    title: marker.title,
+                    title: nextMarker.title,
                     icon: seticon
                   });
-               
-                  window.localStorage.setItem('nextmarker', JSON.stringify(marker));
-                  return false;
-              }
-            });
-    
-            var nextMarker = JSON.parse(window.localStorage.getItem('nextmarker'));
+            
+            
             var acc = parseInt(window.localStorage.getItem('accurancy'));
             var nextMarkerPosition = new google.maps.LatLng(nextMarker.latitude,nextMarker.longitude)
             var dist = gps_distance(latT,longT,nextMarker.latitude,nextMarker.longitude);
