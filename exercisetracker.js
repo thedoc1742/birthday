@@ -33,6 +33,7 @@ var birthdayinfowindows = [];
 var birthdaymarkerpositions = [];
 var map = null;
 var marker = null;
+var distnext = null;
 
 var iconbirthdaymarkerimage = {
     url: 'icon_birthday.png',
@@ -68,7 +69,9 @@ $.getJSON( 'http://www.doc-richter.de/geo/birthday.json', function(data) {
             $.each( data.markers, function(i, marker) {
               var markerposition = new google.maps.LatLng(marker.latitude,marker.longitude);
               birthdaymarkerpositions.push(markerposition);
-            })
+            });
+            var localData = JSON.stringify(data);
+            window.localStorage.setItem('visitedmarkers', localData);
 });
 
 $('#newhome').live("pagebeforeshow", function() {
@@ -150,7 +153,7 @@ $('#newhome').live("pagebeforeshow", function() {
                title: 'Da sind wir!'
             });
             
-            $.getJSON( 'http://www.doc-richter.de/geo/birthday.json', function(data) { 
+            $.parseJSON( window.localStorage.getItem('visitedmarkers'), function(data) { 
             $.each( data.markers, function(i, marker) {
               var markerposition = new google.maps.LatLng(marker.latitude,marker.longitude);
               console.log(i+' '+markerposition);
@@ -160,6 +163,7 @@ $('#newhome').live("pagebeforeshow", function() {
               } else {
                 seticon = iconbirthdayschatzimage;
               } 
+              console.log(seticon);
               
               var m = new google.maps.Marker({
                  position: markerposition,
@@ -221,9 +225,6 @@ $('#newhome').live("pageshow", function() {
               
             }            
             $('#distance').html(dist);
-            $('#number').html('1.');
-            
-            
         },
         // Error
         showError,
