@@ -220,8 +220,8 @@ $('#newhome').live("pageshow", function() {
               $('#marker'+i).html('Entfernung: '+dist+' m');
               
             }            
-            console.log('Draussen');
-            
+            $('#distance').html(dist);
+            $('#number').html('1.');
             
             
         },
