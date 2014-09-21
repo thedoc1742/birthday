@@ -205,6 +205,7 @@ $('#newhome').live("pageshow", function() {
             var rt = parseInt(window.localStorage.getItem('runtype'));
             
             if(rt == "debug") {
+              alert('debug');
               latT  = marker.latitude;
               longT = marker.longitude;
               latLng = new google.maps.LatLng(latT,longT);
