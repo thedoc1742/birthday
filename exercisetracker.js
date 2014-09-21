@@ -172,9 +172,11 @@ $('#newhome').live("pagebeforeshow", function() {
             
             myListener = google.maps.event.addListener(map, 'click', function(event) {
               moveMe(map,marker,event.latLng);
+              updateAll();
             });
-            google.maps.event.addListener(map, 'drag', function(event) {
-              placeMarker(map,marker,event.latLng);
+            myDragListener = google.maps.event.addListener(map, 'drag', function(event) {
+              moveMe(map,marker,event.latLng);
+              updateAll();
             });
         }, 
         showError, 
@@ -185,6 +187,63 @@ $('#newhome').live("pagebeforeshow", function() {
                 //maximumAge:Infinity
         });
 })  
+
+function updateAll() {
+            var latT = marker.position.lat();
+            var longT = marker.position.lng();
+
+            var latLng = new google.maps.LatLng(latT,longT);
+            
+            moveMe(map,marker,latLng);
+            
+            console.log(window.localStorage.getItem('visitedmarkers'));
+            
+            vM = $.parseJSON( window.localStorage.getItem('visitedmarkers'));
+            
+            var nextMarker = JSON.parse(window.localStorage.getItem('nextmarker'));
+            
+            var markerposition = new google.maps.LatLng(nextMarker.latitude,nextMarker.longitude);
+            var seticon = null;
+              
+                  if(nextMarker.type == "actionpoint") {
+                    seticon = iconbirthdaymarkerimage;
+                  } else {
+                    seticon = iconbirthdayschatzimage;
+                  } 
+              
+                  console.log(seticon);
+              
+                  var m = new google.maps.Marker({
+                    position: markerposition,
+                    map: map,
+                    title: nextMarker.title,
+                    icon: seticon,
+                    draggable: true
+                  });
+            
+            
+            var acc = parseInt(window.localStorage.getItem('accurancy'));
+           
+            var nextMarkerPosition = new google.maps.LatLng(nextMarker.latitude,nextMarker.longitude)
+            var dist = gps_distance(latT,longT,nextMarker.latitude,nextMarker.longitude);
+            console.log(nextMarker.latitude+' '+nextMarker.longitude+' '+dist);
+            if(dist < acc) {
+            
+                  var infowindow = new google.maps.InfoWindow({
+                    map: map,
+                    position: nextMarkerPosition,
+                    content: '<div id="nextmarker">'+nextMarker.title+'</div>',
+                    maxWidth: 2000
+                  });
+                  
+                  setVisited(nextMarker.id);
+                  setNextMarker(nextMarker.id+1);
+                  
+            } 
+            
+            $('#distance').html(dist);
+
+}
 
 $('#newhome').live("pageshow", function() {
         
@@ -231,7 +290,8 @@ $('#newhome').live("pageshow", function() {
                     position: markerposition,
                     map: map,
                     title: nextMarker.title,
-                    icon: seticon
+                    icon: seticon,
+                    draggable: true
                   });
             
             
@@ -251,6 +311,7 @@ $('#newhome').live("pageshow", function() {
                   
                   setVisited(nextMarker.id);
                   setNextMarker(nextMarker.id+1);
+                  updateAll();
             } 
             
             $('#distance').html(dist);
@@ -291,6 +352,7 @@ function setNextMarker(id) {
     for (var i=0; i<jsonObj.markers.length; i++) {
     if (jsonObj.markers[i].id == id) {
       window.localStorage.setItem('nextmarker',JSON.stringify(jsonObj.markers[i]));
+      updateAll();
       return;
     }
     }
