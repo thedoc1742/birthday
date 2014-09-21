@@ -69,6 +69,8 @@ var iconbirthdayschatzimage = {
 
 window.localStorage.setItem('nextmarker', null);
 window.localStorage.setItem('accurancy', '10');
+window.localStorage.setItem('runtype', 'live');
+
 
 
 
@@ -164,7 +166,15 @@ $('#newhome').live("pagebeforeshow", function() {
                position: latLng,
                map: map,
                icon: meicon,
-               title: 'Da sind wir!'
+               title: 'Da sind wir!',
+               draggable: true
+            });
+            
+            myListener = google.maps.event.addListener(map, 'click', function(event) {
+              moveMe(map,marker,event.latLng);
+            });
+            google.maps.event.addListener(map, 'drag', function(event) {
+              placeMarker(map,marker,event.latLng);
             });
         }, 
         showError, 
@@ -189,6 +199,14 @@ $('#newhome').live("pageshow", function() {
             var longT = position.coords.longitude;
 
             var latLng = new google.maps.LatLng(latT,longT);
+            
+            var rt = parseInt(window.localStorage.getItem('runtype'));
+            
+            if(rt == "debug") {
+              latT  = marker.latitude;
+              longT = marker.longitude;
+              latLng = new google.maps.LatLng(latT,longT);
+            } 
             
             moveMe(map,marker,latLng);
             
