@@ -87,6 +87,8 @@ $.getJSON( 'http://www.doc-richter.de/geo/birthday.json', function(data) {
             var localData = JSON.stringify(data);
             window.localStorage.setItem('visitedmarkers', localData);
             window.localStorage.setItem('accurancy',''+data.accurancy);
+            window.localStorage.setItem('runtype',''+data.runtype);
+            
 });
 
 
