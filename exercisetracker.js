@@ -204,7 +204,10 @@ $('#newhome').live("pageshow", function() {
             
             var rt = window.localStorage.getItem('runtype');
             
+            alert(rt);
+            
             if(rt == "debug") {
+              alert('drin '+rt);
               latT  = marker.latitude;
               longT = marker.longitude;
               latLng = new google.maps.LatLng(latT,longT);
