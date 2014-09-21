@@ -202,10 +202,9 @@ $('#newhome').live("pageshow", function() {
 
             var latLng = new google.maps.LatLng(latT,longT);
             
-            var rt = parseInt(window.localStorage.getItem('runtype'));
+            var rt = window.localStorage.getItem('runtype');
             
             if(rt == "debug") {
-              alert('debug');
               latT  = marker.latitude;
               longT = marker.longitude;
               latLng = new google.maps.LatLng(latT,longT);
