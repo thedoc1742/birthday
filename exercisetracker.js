@@ -72,8 +72,6 @@ window.localStorage.setItem('accurancy', '10');
 window.localStorage.setItem('runtype', 'live');
 
 
-
-
 $.getJSON( 'http://www.doc-richter.de/geo/birthday.json', function(data) {
             var setnext = false; 
             $.each( data.markers, function(i, marker) {
@@ -204,12 +202,9 @@ $('#newhome').live("pageshow", function() {
             
             var rt = window.localStorage.getItem('runtype');
             
-            alert(rt);
-            
             if(rt == "debug") {
-              alert('drin '+rt);
-              latT  = marker.latitude;
-              longT = marker.longitude;
+              latT  = marker.position.lat();
+              longT = marker.position.lng();
               latLng = new google.maps.LatLng(latT,longT);
             } 
             
@@ -241,6 +236,7 @@ $('#newhome').live("pageshow", function() {
             
             
             var acc = parseInt(window.localStorage.getItem('accurancy'));
+           
             var nextMarkerPosition = new google.maps.LatLng(nextMarker.latitude,nextMarker.longitude)
             var dist = gps_distance(latT,longT,nextMarker.latitude,nextMarker.longitude);
             console.log(nextMarker.latitude+' '+nextMarker.longitude+' '+dist);
