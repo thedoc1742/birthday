@@ -7,8 +7,12 @@
 	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDUx_HOOmMnESX7e9-bSqVFdj19HVUqpO4&sensor=false"></script>
 	<script type="text/javascript" src="json2.js"></script>
 	<script type="text/javascript" src="jquery-1.7.2.min.js"></script>
-	<script type="text/javascript" src="jquery.mobile-1.1.0.min.js"></script>
+	<script type="text/javascript" src="jquery.mobile-1.3.0.js"></script>
   <script type="text/javascript" src="exercisetracker.js"></script>
+  <link rel="stylesheet" href="jquery.mobile-1.3.0.css">
+  <link rel="stylesheet" href="themes/dkm.css">
+  
+  
   <script>
          // Function called when page has loaded
 function init() {
@@ -17,7 +21,7 @@ function init() {
 
 // Function called when phonegap is ready
 function onDeviceReady() {
-    //All pages at least 100% of viewport height
+    /* All pages at least 100% of viewport height
     var viewPortHeight = $(window).height();
     var headerHeight = $('div[data-role="header"]').height();
     var footerHeight = $('div[data-role="footer"]').height();
@@ -25,10 +29,10 @@ function onDeviceReady() {
     console.log(contentHeight);
 
     // Set all pages with class="page-content" to be at least contentHeight
-    $('div[data-role="content"]').css({'min-height': contentHeight + 'px'});
+    $('div[data-role="content"]').css({'min-height': contentHeight + 'px'}); */
  }
   </script>
-	<link rel="stylesheet" href="jquery.mobile-1.1.0.min.css" />
+	
   <style>
           .center-wrapper{
             text-align: center;
@@ -41,12 +45,13 @@ function onDeviceReady() {
 </head>
 <body onLoad="init();">
 <!-- Start of Home page -->
-<div data-role="page" id="home" style="background-color: #F8C0DB; width: 100%; height: 100%;padding:0;position:absolute;">
+<div data-role="page" id="home" class="ui-page" style="background-color: #F8C0DB; width: 100%; height: 100%;padding:0;position:absolute;">
 
 
               
 	<div data-role="content" style="background-color: #F8C0DB; width: 100%; height: 100%;padding:0;position:absolute;">
 		<div class="center-wrapper">
+     
       <p><img src="title.png" style="align: center; border:none;"/></p>
       <a href="#newhome" data-role="button" data-icon="star" data-inline="true">Schatzsuche starten</a>
     </div>
@@ -54,13 +59,126 @@ function onDeviceReady() {
       
 
 </div>
-<div data-role="page" id="newhome" style="width:100%;height:100%;padding:0;position:absolute;">
-              <div data-role="header">
-		<h1>noch <span id="distance">x</span> m</h1>
-	            </div>          
-
-	<div data-role="content" id="google_map" style="width:100%;height:100%;padding:0;position:absolute;"/>
+<div data-role="page" id="newhome" class="ui-page" data-theme="a">
+              <div data-role="header" data-position="fixed" data-theme="a">
+              <h1>noch <span id="distance">x</span> m</h1>
+              </div>          
+  
+	<div data-role="content" id="google_map" style="width:100%;height:100%;padding:0;position:absolute;">
+                  <div class="ui-corner-all" data-role="popup" id="popup1" style="max-width:400px;" data-theme="a" data-dismissible="true">
+                    <div id="antwortlayer1">
+                      <div style="padding:10px 20px;">
+							         <h3>Frage 1</h3>
+					    	       <button data-theme="a" data-icon="check" id="antwort11">Antwort 1</button>
+                       <button data-theme="a" data-icon="check" id="antwort12">Antwort 2</button>
+                      </div>
+                    </div>
+                    <div id="errorlayer1" style="display: none;">
+                      <div style="padding:10px 20px;">
+							         <h3>FALSCH</h3>
+					    	       <button data-theme="a" data-icon="check" id="again1">Nochmal?</button>
+                       <button data-theme="a" data-icon="check" id="home1">Nach Hause gehen</button>
+                      </div>
+                    </div>
+                    <div id="correctlayer1" style="display: none;">
+                      <div style="padding:10px 20px;">
+							         <h3>RICHTIG</h3>
+					    	       <button data-theme="a" data-icon="arrow-r" id="close1">Weiter</button>
+                      </div>
+                    </div>
+				          </div>
+                  <div class="ui-corner-all" data-role="popup" id="popup2" style="max-width:400px;" data-theme="a" data-dismissible="true">
+                    <div id="antwortlayer2">
+                      <div style="padding:10px 20px;">
+							         <h3>Frage 2</h3>
+					    	       <button data-theme="a" data-icon="check" id="antwort21">Antwort 1</button>
+                       <button data-theme="a" data-icon="check" id="antwort22">Antwort 2</button>
+                      </div>
+                    </div>
+                    <div id="errorlayer2" style="display: none;">
+                      <div style="padding:10px 20px;">
+							         <h3>FALSCH</h3>
+					    	       <button data-theme="a" data-icon="check" id="again2">Nochmal?</button>
+                       <button data-theme="a" data-icon="check" id="home2">Nach Hause gehen</button>
+                      </div>
+                    </div>
+                    <div id="correctlayer2" style="display: none;">
+                      <div style="padding:10px 20px;">
+							         <h3>RICHTIG</h3>
+					    	       <button data-theme="a" data-icon="arrow-r" id="close2">Weiter</button>
+                      </div>
+                    </div>
+				          </div>
+                  <div class="ui-corner-all" data-role="popup" id="popup3" style="max-width:400px;" data-theme="a" data-dismissible="true">
+                    <div id="antwortlayer3">
+                      <div style="padding:10px 20px;">
+							         <h3>Frage 3</h3>
+					    	       <button data-theme="a" data-icon="check" id="antwort31">Antwort 1</button>
+                       <button data-theme="a" data-icon="check" id="antwort32">Antwort 2</button>
+                      </div>
+                    </div>
+                    <div id="errorlayer3" style="display: none;">
+                      <div style="padding:10px 20px;">
+							         <h3>FALSCH</h3>
+					    	       <button data-theme="a" data-icon="check" id="again3">Nochmal?</button>
+                       <button data-theme="a" data-icon="check" id="home3">Nach Hause gehen</button>
+                      </div>
+                    </div>
+                    <div id="correctlayer3" style="display: none;">
+                      <div style="padding:10px 20px;">
+							         <h3>RICHTIG</h3>
+					    	       <button data-theme="a" data-icon="arrow-r" id="close3">Weiter</button>
+                      </div>
+                    </div>
+				          </div>
+                  <div class="ui-corner-all" data-role="popup" id="popup4" style="max-width:400px;" data-theme="a" data-dismissible="true">
+                    <div id="antwortlayer4">
+                      <div style="padding:10px 20px;">
+							         <h3>Frage 4</h3>
+					    	       <button data-theme="a" data-icon="check" id="antwort41">Antwort 1</button>
+                       <button data-theme="a" data-icon="check" id="antwort42">Antwort 2</button>
+                      </div>
+                    </div>
+                    <div id="errorlayer4" style="display: none;">
+                      <div style="padding:10px 20px;">
+							         <h3>FALSCH</h3>
+					    	       <button data-theme="a" data-icon="check" id="again4">Nochmal?</button>
+                       <button data-theme="a" data-icon="check" id="home4">Nach Hause gehen</button>
+                      </div>
+                    </div>
+                    <div id="correctlayer4" style="display: none;">
+                      <div style="padding:10px 20px;">
+							         <h3>RICHTIG</h3>
+					    	       <button data-theme="a" data-icon="arrow-r" id="close4">Weiter</button>
+                      </div>
+                    </div>
+				          </div>
+                  <div class="ui-corner-all" data-role="popup" id="popup5" style="max-width:400px;" data-theme="a" data-dismissible="true">
+                    <div id="antwortlayer5">
+                      <div style="padding:10px 20px;">
+							         <h3>Frage 5</h3>
+					    	       <button data-theme="a" data-icon="check" id="antwort51">Antwort 1</button>
+                       <button data-theme="a" data-icon="check" id="antwort52">Antwort 2</button>
+                      </div>
+                    </div>
+                    <div id="errorlayer5" style="display: none;">
+                      <div style="padding:10px 20px;">
+							         <h3>FALSCH</h3>
+					    	       <button data-theme="a" data-icon="check" id="again5">Nochmal?</button>
+                       <button data-theme="a" data-icon="check" id="home5">Nach Hause gehen</button>
+                      </div>
+                    </div>
+                    <div id="correctlayer5" style="display: none;">
+                      <div style="padding:10px 20px;">
+							         <h3>RICHTIG</h3>
+					    	       <button data-theme="a" data-icon="arrow-r" id="close5">Weiter</button>
+                      </div>
+                    </div>
+				          </div>
+  </div>
+  
 </div>
+
 <!-- End of Home page -->
 </body>
 </html>

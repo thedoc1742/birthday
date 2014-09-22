@@ -16,12 +16,6 @@ function gps_distance(lat1, lon1, lat2, lon2)
 }
 
 document.addEventListener("deviceready", function(){
-	
-	if(navigator.network.connection.type == Connection.NONE){
-		$("#home_network_button").text('No Internet Access')
-								 .attr("data-icon", "delete")
-								 .button('refresh');
-	}
 
 });
 
@@ -67,6 +61,8 @@ var iconbirthdayschatzimage = {
     anchor: new google.maps.Point(25, 25)
 };
 
+
+
 window.localStorage.setItem('nextmarker', null);
 window.localStorage.setItem('accurancy', '10');
 window.localStorage.setItem('runtype', 'live');
@@ -81,15 +77,16 @@ $.getJSON( 'http://www.doc-richter.de/geo/birthday.json', function(data) {
               }
               var markerposition = new google.maps.LatLng(marker.latitude,marker.longitude);
               birthdaymarkerpositions.push(markerposition);
+              
+              
             });
+            
             var localData = JSON.stringify(data);
             window.localStorage.setItem('visitedmarkers', localData);
             window.localStorage.setItem('accurancy',''+data.accurancy);
             window.localStorage.setItem('runtype',''+data.runtype);
             
 });
-
-
 
 $('#newhome').live("pagebeforeshow", function() {
 
@@ -211,8 +208,6 @@ function updateAll() {
                     seticon = iconbirthdayschatzimage;
                   } 
               
-                  console.log(seticon);
-              
                   var m = new google.maps.Marker({
                     position: markerposition,
                     map: map,
@@ -227,17 +222,13 @@ function updateAll() {
             var nextMarkerPosition = new google.maps.LatLng(nextMarker.latitude,nextMarker.longitude)
             var dist = gps_distance(latT,longT,nextMarker.latitude,nextMarker.longitude);
             console.log(nextMarker.latitude+' '+nextMarker.longitude+' '+dist);
-            if(dist < acc) {
+            var nextMarkerPopup = '#popup'+nextMarker.id;
             
-                  var infowindow = new google.maps.InfoWindow({
-                    map: map,
-                    position: nextMarkerPosition,
-                    content: '<div id="nextmarker">'+nextMarker.title+'</div>',
-                    maxWidth: 2000
-                  });
-                  
+            if(dist < acc && $(nextMarkerPopup).parent().hasClass('ui-popup-hidden')) {
+            
+                  $(nextMarkerPopup).popup("open");
                   setVisited(nextMarker.id);
-                  setNextMarker(nextMarker.id+1);
+                  
                   
             } 
             
@@ -248,6 +239,136 @@ function updateAll() {
 $('#newhome').live("pageshow", function() {
         
         // Place and move the marker regarding to my position and deplacement
+        $('#antwort11').click(function() {
+           console.log("antwort11");
+           $('#antwortlayer1').hide();
+           $('#correctlayer1').show();
+        });
+        $('#antwort12').click(function() {
+           console.log("antwort12");
+           $('#antwortlayer1').hide();
+           $('#errorlayer1').show();
+        });
+        $('#again1').click(function() {
+           console.log("again1");
+           $('#errorlayer1').hide();
+           $('#antwortlayer1').show();
+        });
+        $('#home1').click(function() {
+           console.log("home1");
+           $('#errorlayer1').hide();
+           $('#antwortlayer1').show();
+        });
+        $('#close1').click(function() {
+           console.log("close1");
+           $('#popup1').popup("close");
+           setNextMarker(2);
+        });
+        
+        $('#antwort21').click(function() {
+           console.log("antwort21");
+           $('#antwortlayer2').hide();
+           $('#correctlayer2').show();
+        });
+        $('#antwort22').click(function() {
+           console.log("antwort22");
+           $('#antwortlayer2').hide();
+           $('#errorlayer2').show();
+        });
+        $('#again2').click(function() {
+           console.log("again2");
+           $('#errorlayer2').hide();
+           $('#antwortlayer2').show();
+        });
+        $('#home2').click(function() {
+           console.log("home2");
+           $('#errorlayer2').hide();
+           $('#antwortlayer2').show();
+        });
+        $('#close2').click(function() {
+           console.log("close2");
+           $('#popup2').popup("close");
+           setNextMarker(3);
+        });
+        
+        $('#antwort31').click(function() {
+           console.log("antwort31");
+           $('#antwortlayer3').hide();
+           $('#correctlayer3').show();
+        });
+        $('#antwort32').click(function() {
+           console.log("antwort32");
+           $('#antwortlayer3').hide();
+           $('#errorlayer3').show();
+        });
+        $('#again3').click(function() {
+           console.log("again3");
+           $('#errorlayer3').hide();
+           $('#antwortlayer3').show();
+        });
+        $('#home3').click(function() {
+           console.log("home3");
+           $('#errorlayer3').hide();
+           $('#antwortlayer3').show();
+        });
+        $('#close3').click(function() {
+           console.log("close3");
+           $('#popup3').popup("close");
+           setNextMarker(4);
+        });
+        
+        $('#antwort41').click(function() {
+           console.log("antwort41");
+           $('#antwortlayer4').hide();
+           $('#correctlayer4').show();
+        });
+        $('#antwort42').click(function() {
+           console.log("antwort42");
+           $('#antwortlayer4').hide();
+           $('#errorlayer4').show();
+        });
+        $('#again4').click(function() {
+           console.log("again4");
+           $('#errorlayer4').hide();
+           $('#antwortlayer4').show();
+        });
+        $('#home4').click(function() {
+           console.log("home4");
+           $('#errorlayer4').hide();
+           $('#antwortlayer4').show();
+        });
+        $('#close4').click(function() {
+           console.log("close4");
+           $('#popup4').popup("close");
+           setNextMarker(5);
+        });
+        
+        $('#antwort51').click(function() {
+           console.log("antwort51");
+           $('#antwortlayer5').hide();
+           $('#correctlayer5').show();
+        });
+        $('#antwort52').click(function() {
+           console.log("antwort52");
+           $('#antwortlayer5').hide();
+           $('#errorlayer5').show();
+        });
+        $('#again5').click(function() {
+           console.log("again5");
+           $('#errorlayer5').hide();
+           $('#antwortlayer5').show();
+        });
+        $('#home5').click(function() {
+           console.log("home5");
+           $('#errorlayer5').hide();
+           $('#antwortlayer5').show();
+        });
+        $('#close5').click(function() {
+           console.log("close5");
+           $('#popup5').popup("close");
+           setNextMarker(6);
+        });
+        
     
         //var track_id = "me";
         watch_id = navigator.geolocation.watchPosition(
@@ -302,16 +423,13 @@ $('#newhome').live("pageshow", function() {
             console.log(nextMarker.latitude+' '+nextMarker.longitude+' '+dist);
             if(dist < acc) {
             
-                  var infowindow = new google.maps.InfoWindow({
-                    map: map,
-                    position: nextMarkerPosition,
-                    content: '<div id="nextmarker">'+nextMarker.title+'</div>',
-                    maxWidth: 2000
-                  });
+                  var nextMarkerPopup = '#popup'+nextMarker.id;
+            
+                  $(nextMarkerPopup).popup("open");
                   
                   setVisited(nextMarker.id);
-                  setNextMarker(nextMarker.id+1);
-                  updateAll();
+                  
+                  
             } 
             
             $('#distance').html(dist);
