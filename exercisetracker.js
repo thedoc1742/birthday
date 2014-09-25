@@ -61,7 +61,7 @@ var iconbirthdayschatzimage = {
     anchor: new google.maps.Point(25, 25)
 };
 
-
+var nM = null;
 
 window.localStorage.setItem('nextmarker', null);
 window.localStorage.setItem('accurancy', '10');
@@ -169,11 +169,11 @@ $('#newhome').live("pagebeforeshow", function() {
             
             myListener = google.maps.event.addListener(map, 'click', function(event) {
               moveMe(map,marker,event.latLng);
-              updateAll();
+              updateAll(false);
             });
             myDragListener = google.maps.event.addListener(map, 'drag', function(event) {
               moveMe(map,marker,event.latLng);
-              updateAll();
+              updateAll(false);
             });
         }, 
         showError, 
@@ -185,7 +185,7 @@ $('#newhome').live("pagebeforeshow", function() {
         });
 })  
 
-function updateAll() {
+function updateAll(trigger) {
             var latT = marker.position.lat();
             var longT = marker.position.lng();
 
@@ -207,8 +207,10 @@ function updateAll() {
                   } else {
                     seticon = iconbirthdayschatzimage;
                   } 
+            
+            if (nM == null || trigger) {
               
-                  var m = new google.maps.Marker({
+                  nM = new google.maps.Marker({
                     position: markerposition,
                     map: map,
                     title: nextMarker.title,
@@ -216,6 +218,7 @@ function updateAll() {
                     draggable: true
                   });
             
+            }
             
             var acc = parseInt(window.localStorage.getItem('accurancy'));
            
@@ -228,7 +231,6 @@ function updateAll() {
             
                   $(nextMarkerPopup).popup("open");
                   setVisited(nextMarker.id);
-                  
                   
             } 
             
@@ -406,14 +408,18 @@ $('#newhome').live("pageshow", function() {
                   } 
               
                   console.log(seticon);
+            
+            if(nM == null) {
               
-                  var m = new google.maps.Marker({
+                  nM = new google.maps.Marker({
                     position: markerposition,
                     map: map,
                     title: nextMarker.title,
                     icon: seticon,
                     draggable: true
                   });
+                  
+            }
             
             
             var acc = parseInt(window.localStorage.getItem('accurancy'));
@@ -470,7 +476,7 @@ function setNextMarker(id) {
     for (var i=0; i<jsonObj.markers.length; i++) {
     if (jsonObj.markers[i].id == id) {
       window.localStorage.setItem('nextmarker',JSON.stringify(jsonObj.markers[i]));
-      updateAll();
+      updateAll(true);
       return;
     }
     }
