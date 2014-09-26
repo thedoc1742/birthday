@@ -186,6 +186,7 @@ $('#newhome').live("pagebeforeshow", function() {
 })  
 
 function toggleTaschenlampe() {
+    alert("drin");
     // switch on
     window.plugins.flashlight.toggle(showSuccess,showError); // success/error callbacks may be passed
   
