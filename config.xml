@@ -28,6 +28,10 @@
     <icon src="icon.png" />
     
     <preference name="permissions" value="none"/>
+    
+    <feature name="http://api.phonegap.com/1.0/camera"/>
+    
+    <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="3000" />
     
     <!-- to enable individual permissions use the following examples -->
@@ -42,6 +46,6 @@
  
     <gap:plugin name="org.apache.cordova.device" />
     <gap:plugin name="org.apache.cordova.geolocation" version="0.3.7" />
-    <gap:plugin name="nl.x-services.plugins.flashlight" />
+    <gap:plugin name="nl.x-services.plugins.flashlight" version="2.0.0"/>
     
 </widget>
