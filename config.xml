@@ -27,15 +27,12 @@
     
     <icon src="icon.png" />
     
-    <preference name="permissions" value="none"/>
+    <preference name="permissions" value="*"/>
     
-    <feature name="http://api.phonegap.com/1.0/camera"/>
     
     <feature name="Flashlight">
       <param name="android-package" value="nl.xservices.plugins.Flashlight" />
     </feature>
-    
-    <uses-permission android:name="android.permission.CAMERA"/>
     
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="3000" />
