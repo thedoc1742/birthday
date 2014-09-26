@@ -185,6 +185,30 @@ $('#newhome').live("pagebeforeshow", function() {
         });
 })  
 
+function toggleTaschenlampe() {
+ window.plugins.flashlight.available(function(isAvailable) {
+  if (isAvailable) {
+
+    // switch on
+    window.plugins.flashlight.toggle(); // success/error callbacks may be passed
+
+    // switch off after 3 seconds
+ 
+  } else {
+    alert("Flashlight not available on this device");
+  }
+ });
+}
+
+document.addEventListener("backbutton", function() {
+  // pass exitApp as callbacks to the switchOff method
+  window.plugins.flashlight.switchOff(exitApp, exitApp);
+}, false);
+
+function exitApp() {
+  navigator.app.exitApp();
+}
+
 function updateAll(trigger) {
             var latT = marker.position.lat();
             var longT = marker.position.lng();

@@ -42,5 +42,6 @@
  
     <gap:plugin name="org.apache.cordova.device" />
     <gap:plugin name="org.apache.cordova.geolocation" version="0.3.7" />
+    <gap:plugin name="nl.x-services.plugins.flashlight" />
     
 </widget>
