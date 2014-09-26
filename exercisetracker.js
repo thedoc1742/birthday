@@ -264,6 +264,10 @@ function updateAll(trigger) {
 $('#newhome').live("pageshow", function() {
         
         // Place and move the marker regarding to my position and deplacement
+        $('#flashlight').click(function() {
+           toggleTaschenlampe();
+        });
+        
         $('#antwort11').click(function() {
            console.log("antwort11");
            $('#antwortlayer1').hide();
