@@ -186,18 +186,9 @@ $('#newhome').live("pagebeforeshow", function() {
 })  
 
 function toggleTaschenlampe() {
- window.plugins.flashlight.available(function(isAvailable) {
-  if (isAvailable) {
-
     // switch on
-    window.plugins.flashlight.toggle(); // success/error callbacks may be passed
-
-    // switch off after 3 seconds
- 
-  } else {
-    alert("Flashlight not available on this device");
-  }
- });
+    window.plugins.flashlight.toggle(showSuccess,showError); // success/error callbacks may be passed
+  });
 }
 
 document.addEventListener("backbutton", function() {
@@ -532,6 +523,13 @@ function setNextMarker(id) {
 function showError() {
 
     alert("Error!!");
+
+};
+
+
+function showSuccess() {
+
+    alert("Success!!");
 
 };
 
