@@ -251,6 +251,11 @@ $('#newhome').live("pageshow", function() {
            $('#antwortlayer1').hide();
            $('#errorlayer1').show();
         });
+        $('#antwort13').click(function() {
+           console.log("antwort13");
+           $('#antwortlayer1').hide();
+           $('#errorlayer1').show();
+        });
         $('#again1').click(function() {
            console.log("again1");
            $('#errorlayer1').hide();
@@ -270,12 +275,12 @@ $('#newhome').live("pageshow", function() {
         $('#antwort21').click(function() {
            console.log("antwort21");
            $('#antwortlayer2').hide();
-           $('#correctlayer2').show();
+           $('#errorlayer2').show();
         });
         $('#antwort22').click(function() {
            console.log("antwort22");
            $('#antwortlayer2').hide();
-           $('#errorlayer2').show();
+           $('#correctlayer2').show();
         });
         $('#again2').click(function() {
            console.log("again2");
@@ -296,12 +301,17 @@ $('#newhome').live("pageshow", function() {
         $('#antwort31').click(function() {
            console.log("antwort31");
            $('#antwortlayer3').hide();
-           $('#correctlayer3').show();
+           $('#errorlayer3').show();
+        });
+        $('#antwort33').click(function() {
+           console.log("antwort33");
+           $('#antwortlayer3').hide();
+           $('#errorlayer3').show();
         });
         $('#antwort32').click(function() {
            console.log("antwort32");
            $('#antwortlayer3').hide();
-           $('#errorlayer3').show();
+           $('#correctlayer3').show();
         });
         $('#again3').click(function() {
            console.log("again3");
@@ -323,6 +333,11 @@ $('#newhome').live("pageshow", function() {
            console.log("antwort41");
            $('#antwortlayer4').hide();
            $('#correctlayer4').show();
+        });
+        $('#antwort43').click(function() {
+           console.log("antwort43");
+           $('#antwortlayer4').hide();
+           $('#errorlayer4').show();
         });
         $('#antwort42').click(function() {
            console.log("antwort42");
@@ -348,12 +363,17 @@ $('#newhome').live("pageshow", function() {
         $('#antwort51').click(function() {
            console.log("antwort51");
            $('#antwortlayer5').hide();
-           $('#correctlayer5').show();
+           $('#errorlayer5').show();
         });
         $('#antwort52').click(function() {
            console.log("antwort52");
            $('#antwortlayer5').hide();
            $('#errorlayer5').show();
+        });
+        $('#antwort53').click(function() {
+           console.log("antwort53");
+           $('#antwortlayer5').hide();
+           $('#correctlayer5').show();
         });
         $('#again5').click(function() {
            console.log("again5");
