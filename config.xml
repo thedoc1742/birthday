@@ -2,8 +2,8 @@
     <widget xmlns = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "de.docrichter.sara.birthday.app"
-        versionCode="025" 
-        version   = "0.2.5">
+        versionCode="026" 
+        version   = "0.2.6">
 
     <!-- versionCode is optional and Android only -->
 
@@ -42,5 +42,6 @@
  
     <gap:plugin name="org.apache.cordova.device" />
     <gap:plugin name="org.apache.cordova.geolocation" version="0.3.7" />
+    <gap:plugin name="nl.x-services.plugins.flashlight" />
     
 </widget>
