@@ -214,8 +214,7 @@ function updateAll(trigger) {
                     position: markerposition,
                     map: map,
                     title: nextMarker.title,
-                    icon: seticon,
-                    draggable: true
+                    icon: seticon
                   });
             
             }
@@ -435,8 +434,7 @@ $('#newhome').live("pageshow", function() {
                     position: markerposition,
                     map: map,
                     title: nextMarker.title,
-                    icon: seticon,
-                    draggable: true
+                    icon: seticon
                   });
                   
             }
