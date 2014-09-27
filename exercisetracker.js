@@ -266,6 +266,9 @@ $('#newhome').live("pageshow", function() {
         $('#flashlight').click(function() {
            toggleTaschenlampe();
         });
+        $('#switchnext').click(function() {
+           switchNext();
+        });
         
         $('#antwort11').click(function() {
            console.log("antwort11");
