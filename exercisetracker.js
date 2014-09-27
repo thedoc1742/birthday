@@ -185,13 +185,6 @@ $('#newhome').live("pagebeforeshow", function() {
         });
 })  
 
-function toggleTaschenlampe() {
-
-    // switch on
-    window.plugins.flashlight.switchOn(); // success/error callbacks may be passed
-
-}
-
 function switchNext() {
 
     var nextMarker = JSON.parse(window.localStorage.getItem('nextmarker'));
@@ -199,14 +192,6 @@ function switchNext() {
     setNextMarker(nextMarker.id+1);
 }
 
-document.addEventListener("backbutton", function() {
-  // pass exitApp as callbacks to the switchOff method
-  window.plugins.flashlight.switchOff(exitApp, exitApp);
-}, false);
-
-function exitApp() {
-  navigator.app.exitApp();
-}
 
 function updateAll(trigger) {
             var latT = marker.position.lat();
