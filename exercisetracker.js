@@ -509,13 +509,6 @@ function showError() {
 
 };
 
-
-function showSuccess() {
-
-    alert("Success!!");
-
-};
-
 $('#newhome').live("pagebeforehide", function() {
 
         //track_id = "me";
