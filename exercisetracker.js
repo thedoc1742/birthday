@@ -185,13 +185,6 @@ $('#newhome').live("pagebeforeshow", function() {
         });
 })  
 
-function switchNext() {
-
-    var nextMarker = JSON.parse(window.localStorage.getItem('nextmarker'));
-    setVisited(nextMarker.id);
-    setNextMarker(nextMarker.id+1);
-}
-
 
 function updateAll(trigger) {
             var latT = marker.position.lat();
@@ -248,12 +241,6 @@ function updateAll(trigger) {
 $('#newhome').live("pageshow", function() {
         
         // Place and move the marker regarding to my position and deplacement
-        $('#flashlight').click(function() {
-           toggleTaschenlampe();
-        });
-        $('#switchnext').click(function() {
-           switchNext();
-        });
         
         $('#antwort11').click(function() {
            console.log("antwort11");
