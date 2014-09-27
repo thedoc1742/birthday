@@ -190,11 +190,13 @@ function toggleTaschenlampe() {
     // switch on
     window.plugins.flashlight.switchOn(); // success/error callbacks may be passed
 
-    // switch off after 3 seconds
-    setTimeout(function() {
-      window.plugins.flashlight.switchOff(); // success/error callbacks may be passed
-    }, 3000);
+}
 
+function switchNext() {
+
+    var nextMarker = JSON.parse(window.localStorage.getItem('nextmarker'));
+    setVisited(nextMarker.id);
+    setNextMarker(nextMarker.id+1);
 }
 
 document.addEventListener("backbutton", function() {
@@ -263,6 +265,9 @@ $('#newhome').live("pageshow", function() {
         // Place and move the marker regarding to my position and deplacement
         $('#flashlight').click(function() {
            toggleTaschenlampe();
+        });
+        $('#switchnext').click(function() {
+           switchNext();
         });
         
         $('#antwort11').click(function() {
