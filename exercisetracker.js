@@ -242,11 +242,6 @@ $('#newhome').live("pageshow", function() {
         
         // Place and move the marker regarding to my position and deplacement
 
-        $('#switchnext').click(function() {
-           switchNext();
-        });
-
-        
         $('#antwort11').click(function() {
            console.log("antwort11");
            $('#antwortlayer1').hide();
@@ -482,15 +477,6 @@ function moveMe( map, marker, position ) {
     map.panTo(position);
 
 };
-
-function switchNext() {
-   
-   var nextMarker = JSON.parse(window.localStorage.getItem('nextmarker'));
-   setVisited(nextMarker.id);
-   setNextMarker(nextMarker.id+1);
-
-}
-
 
 function setVisited(id) {
     console.log('Set visited: '+id);
