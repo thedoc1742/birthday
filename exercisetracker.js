@@ -112,14 +112,14 @@ $('#newhome').live("pagebeforeshow", function() {
             var featureOpts = [
   {
     "stylers": [
-      { "color": "#a58080" },
+      { "color": "#55277c" },
       { "visibility": "simplified" }
     ]
   },{
     "featureType": "road",
     "stylers": [
       { "visibility": "simplified" },
-      { "color": "#de80b8" }
+      { "color": "#000000" }
     ]
   },{
     "featureType": "road.local",
