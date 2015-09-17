@@ -45,16 +45,15 @@ function onDeviceReady() {
 </head>
 <body onLoad="init();">
 <!-- Start of Home page -->
-<audio id="horrorSound" src="http://www.doc-richter.de/geo/mysty.mp3" type="audio/mpeg" ></audio>
-<audio id="laughSound" src="http://www.doc-richter.de/geo/laugh.mp3" type="audio/mpeg" ></audio>
-<audio id="laugh2Sound" src="http://www.doc-richter.de/geo/laugh2.mp3" type="audio/mpeg" ></audio>
+
+
 <div data-role="page" id="home" class="ui-page" style="background-color: #F8C0DB; width: 100%; height: 100%;padding:0;position:absolute;">
 
 
               
 	<div data-role="content" style="background-color: #F8C0DB; width: 100%; height: 100%;padding:0;position:absolute;">
 		<div class="center-wrapper">
-     
+      <audio id="horrorSound" src="http://www.doc-richter.de/geo/mysty.mp3" type="audio/mpeg" ></audio>
       <p><img src="title.png" style="align: center; border:none;"/></p>
       <a href="#newhome" onclick="document.getElementById('horrorSound').play();" data-role="button" data-icon="star" data-inline="true">Schatzsuche starten</a>
     </div>
@@ -63,11 +62,14 @@ function onDeviceReady() {
 
 </div>
 <div data-role="page" id="newhome" class="ui-page" data-theme="a">
+
               <div data-role="header" data-position="fixed" data-theme="a">
               <h1>noch <span id="distance">x</span> m</h1>
               </div>          
   
 	<div data-role="content" id="google_map" style="width:100%;height:100%;padding:0;position:absolute;">
+  <audio id="laughSound" src="http://www.doc-richter.de/geo/laugh.mp3" type="audio/mpeg" ></audio>
+<audio id="laugh2Sound" src="http://www.doc-richter.de/geo/laugh2.mp3" type="audio/mpeg" ></audio>
                   <div class="ui-corner-all" data-role="popup" id="popup1" style="max-width:400px;" data-theme="a" data-dismissible="true">
                     <div id="antwortlayer1">
                       <div style="padding:10px 20px;">

@@ -450,9 +450,10 @@ $('#newhome').live("pageshow", function() {
             if(dist < acc) {
             
                   var nextMarkerPopup = '#popup'+nextMarker.id;
-            
-                  $(nextMarkerPopup).popup("open");
+                  
                   $('#laughSound').play();
+                  $(nextMarkerPopup).popup("open");
+                  
                   
                   setVisited(nextMarker.id);
                   
