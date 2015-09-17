@@ -452,6 +452,7 @@ $('#newhome').live("pageshow", function() {
                   var nextMarkerPopup = '#popup'+nextMarker.id;
             
                   $(nextMarkerPopup).popup("open");
+                  $('#laughSound').play();
                   
                   setVisited(nextMarker.id);
                   
