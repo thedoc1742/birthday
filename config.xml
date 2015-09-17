@@ -2,8 +2,8 @@
     <widget xmlns = "http://www.w3.org/ns/widgets"
         xmlns:gap = "http://phonegap.com/ns/1.0"
         id        = "de.docrichter.sara.birthday.app"
-        versionCode="028" 
-        version   = "0.2.8">
+        versionCode="0411" 
+        version   = "0.4.11">
 
     <!-- versionCode is optional and Android only -->
 
