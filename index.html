@@ -45,6 +45,7 @@ function onDeviceReady() {
 </head>
 <body onLoad="init();">
 <!-- Start of Home page -->
+<audio id="horrorSound" src="http://www.doc-richter.de/geo/mysty.mp3" type="audio/mpeg" ></audio>
 <div data-role="page" id="home" class="ui-page" style="background-color: #F8C0DB; width: 100%; height: 100%;padding:0;position:absolute;">
 
 
@@ -53,7 +54,7 @@ function onDeviceReady() {
 		<div class="center-wrapper">
      
       <p><img src="title.png" style="align: center; border:none;"/></p>
-      <a href="#newhome" data-role="button" data-icon="star" data-inline="true">Schatzsuche starten</a>
+      <a href="#newhome" onclick="document.getElementById('horrorSound').play();" data-role="button" data-icon="star" data-inline="true">Schatzsuche starten</a>
     </div>
 	</div>
       
