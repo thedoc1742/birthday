@@ -451,7 +451,8 @@ $('#newhome').live("pageshow", function() {
             
                   var nextMarkerPopup = '#popup'+nextMarker.id;
                   
-                  $('#laughSound').play();
+                  document.getElementById('laughSound').play();
+                  
                   $(nextMarkerPopup).popup("open");
                   
                   

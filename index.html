@@ -54,6 +54,8 @@ function onDeviceReady() {
 	<div data-role="content" style="background-color: #F8C0DB; width: 100%; height: 100%;padding:0;position:absolute;">
 		<div class="center-wrapper">
       <audio id="horrorSound" src="http://www.doc-richter.de/geo/mysty.mp3" type="audio/mpeg" ></audio>
+  <audio id="laughSound" src="http://www.doc-richter.de/geo/laugh.mp3" type="audio/mpeg" ></audio>
+<audio id="laugh2Sound" src="http://www.doc-richter.de/geo/laugh2.mp3" type="audio/mpeg" ></audio>
       <p><img src="title.png" style="align: center; border:none;"/></p>
       <a href="#newhome" onclick="document.getElementById('horrorSound').play();" data-role="button" data-icon="star" data-inline="true">Schatzsuche starten</a>
     </div>
@@ -68,14 +70,12 @@ function onDeviceReady() {
               </div>          
   
 	<div data-role="content" id="google_map" style="width:100%;height:100%;padding:0;position:absolute;">
-  <audio id="laughSound" src="http://www.doc-richter.de/geo/laugh.mp3" type="audio/mpeg" ></audio>
-<audio id="laugh2Sound" src="http://www.doc-richter.de/geo/laugh2.mp3" type="audio/mpeg" ></audio>
                   <div class="ui-corner-all" data-role="popup" id="popup1" style="max-width:400px;" data-theme="a" data-dismissible="true">
                     <div id="antwortlayer1">
                       <div style="padding:10px 20px;">
 							         <h3>Wo lebt die Seewespe?</h3>
 					    	       <button data-theme="a" data-icon="check" id="antwort11">im Meer</button>
-                       <button data-theme="a" data-icon="check" id="antwort12">in Erdhöhlen</button>
+                       <button data-theme="a" data-icon="check" id="antwort12">in Erdh&ouml;hlen</button>
                        <button data-theme="a" data-icon="check" id="antwort13">in Baumrinden</button>
                       </div>
                     </div>
@@ -97,7 +97,7 @@ function onDeviceReady() {
                     <div id="antwortlayer2">
                       <div style="padding:10px 20px;">
 							         <h3>An welchen Pflanzen wachsen Datteln?</h3>
-					    	       <button data-theme="a" data-icon="check" id="antwort21">an Büschen</button>
+					    	       <button data-theme="a" data-icon="check" id="antwort21">an B&uuml;schen</button>
                        <button data-theme="a" data-icon="check" id="antwort22">auf Palmen</button>
                       </div>
                     </div>
@@ -118,7 +118,7 @@ function onDeviceReady() {
                   <div class="ui-corner-all" data-role="popup" id="popup3" style="max-width:400px;" data-theme="a" data-dismissible="true">
                     <div id="antwortlayer3">
                       <div style="padding:10px 20px;">
-							         <h3>Wie oft findet eine Fußball Weltmeisterschaft statt?</h3>
+							         <h3>Wie oft findet eine Fu&szlig;ball Weltmeisterschaft statt?</h3>
 					    	       <button data-theme="a" data-icon="check" id="antwort31">alle 2 Jahre</button>
                        <button data-theme="a" data-icon="check" id="antwort32">alle 4 Jahre</button>
                        <button data-theme="a" data-icon="check" id="antwort33">jedes Jahr</button>
@@ -141,7 +141,7 @@ function onDeviceReady() {
                   <div class="ui-corner-all" data-role="popup" id="popup4" style="max-width:400px;" data-theme="a" data-dismissible="true">
                     <div id="antwortlayer4">
                       <div style="padding:10px 20px;">
-							         <h3>Wie heißt der höchste Berg der Welt?</h3>
+							         <h3>Wie hei&szlig;t der h&ouml;chste Berg der Welt?</h3>
 					    	       <button data-theme="a" data-icon="check" id="antwort41">Mount Everest</button>
                        <button data-theme="a" data-icon="check" id="antwort42">Zugspitze</button>
                        <button data-theme="a" data-icon="check" id="antwort43">K2</button>
@@ -164,7 +164,7 @@ function onDeviceReady() {
                   <div class="ui-corner-all" data-role="popup" id="popup5" style="max-width:400px;" data-theme="a" data-dismissible="true">
                     <div id="antwortlayer5">
                       <div style="padding:10px 20px;">
-							         <h3>Welcher Verein steht momentan auf Platz 1 der Fußball-Bundesliga</h3>
+							         <h3>Welcher Verein steht momentan auf Platz 1 der Fu&szlig;ball-Bundesliga</h3>
 					    	       <button data-theme="a" data-icon="check" id="antwort51">Wolfsburg</button>
                        <button data-theme="a" data-icon="check" id="antwort52">FC Bayern München</button>
                        <button data-theme="a" data-icon="check" id="antwort53">BVB</button>
