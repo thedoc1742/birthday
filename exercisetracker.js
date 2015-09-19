@@ -42,7 +42,7 @@ var iconbirthdaymarkerimage = {
 };
 
 var meicon = {
-    url: 'icon.jpg',
+    url: 'icon2.jpg',
     // This marker is 20 pixels wide by 32 pixels tall.
     size: new google.maps.Size(60, 60),
     // The origin for this image is 0,0.
