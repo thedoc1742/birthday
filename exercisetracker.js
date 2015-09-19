@@ -229,8 +229,6 @@ function updateAll(trigger) {
             
             if(dist < acc && $(nextMarkerPopup).parent().hasClass('ui-popup-hidden')) {
             
-                  alert(nextMarkerPopup+'hidden');
-                  document.getElementById('laughSound').play();
                   $(nextMarkerPopup).popup("open");
                   setVisited(nextMarker.id);
                   
@@ -452,15 +450,8 @@ $('#newhome').live("pageshow", function() {
             if(dist < acc) {
             
                   var nextMarkerPopup = '#popup'+nextMarker.id;
-                  
-                  alert(nextMarkerPopup+'nothidden');
-                  document.getElementById('laughSound').play();
-                  
                   $(nextMarkerPopup).popup("open");
-                  
-                  
                   setVisited(nextMarker.id);
-                  
                   
             } 
             
